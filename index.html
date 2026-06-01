@@ -52,12 +52,15 @@
         }
 
         .dashboard {
-            display: flex; justify-content: space-around; background: white; padding: 15px;
-            border-radius: 20px; margin-bottom: 25px; font-weight: bold; font-size: 18px;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 15px; background: white; padding: 15px;
+            border-radius: 20px; margin-bottom: 25px; font-weight: bold; font-size: 17px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.05); border: 3px dashed var(--secondary-color);
         }
+        @media (max-width: 600px) { .dashboard { grid-template-columns: 1fr; } }
         .score-box { color: #FF4757; }
-        .progress-box { color: var(--accent-color); }
+        .bonus-score-box { color: #FF6B81; }
+        .progress-box { color: var(--accent-color); grid-column: span 2; border-top: 1px dashed #ddd; padding-top: 10px; margin-top: 5px; }
+        @media (max-width: 600px) { .progress-box { grid-column: span 1; } }
 
         .tabs { display: flex; justify-content: center; gap: 15px; margin-bottom: 25px; }
         .tab-btn {
@@ -77,7 +80,7 @@
         .lesson-container.active { display: grid; }
         @media (max-width: 900px) { .lesson-container { grid-template-columns: 1fr; } }
 
-        .reading-panel { background: #FFFDF0; padding: 25px; border-radius: 20px; border: 3px solid #FFEAA7; text-align: center; }
+        .reading-panel { background: #FFFDF0; padding: 25px; border-radius: 20px; border: 3px solid #FFEAA7; text-align: center; align-self: start; }
         .audio-btn {
             background: linear-gradient(to right, #FF1E56, #FFAC41); color: white; border: none;
             padding: 12px 25px; border-radius: 25px; font-size: 16px; font-weight: bold;
@@ -106,8 +109,8 @@
         .quiz-table td:last-child { text-align: center; }
         .quiz-table input[type="checkbox"] { transform: scale(1.3); cursor: pointer; }
 
-        .bonus-section { margin-top: 30px; padding: 20px; background: #F0F3F4; border-radius: 15px; border: 2px dashed #BDC3C7; }
-        .bonus-title { font-size: 16px; color: #7F8C8D; margin-bottom: 15px; font-weight: bold; text-transform: uppercase; display: flex; align-items: center; gap: 8px; }
+        .bonus-section { margin-top: 30px; padding: 20px; background: #FFF0F5; border-radius: 15px; border: 2px dashed #FF6B81; }
+        .bonus-title { font-size: 16px; color: #D81B60; margin-bottom: 15px; font-weight: bold; text-transform: uppercase; display: flex; align-items: center; gap: 8px; }
         
         .drag-zone { display: flex; gap: 10px; margin-bottom: 15px; flex-wrap: wrap; }
         .drag-item { background: #D6EAF8; border: 2px dashed #3498DB; padding: 8px 18px; border-radius: 15px; cursor: move; font-weight: bold; color: #2980B9; user-select: none; }
@@ -118,7 +121,10 @@
         .input-success { border-color: #2ED573 !important; background-color: #D4EDDA; }
 
         .btn-check { background: linear-gradient(to right, #2ED573, #1ABC9C); color: white; border: none; padding: 15px; font-size: 18px; font-weight: bold; border-radius: 15px; cursor: pointer; width: 100%; margin-top: 10px; box-shadow: 0 4px 10px rgba(46, 213, 115, 0.2); }
+        .btn-bonus-check { background: linear-gradient(to right, #FF6B81, #FF4757); color: white; border: none; padding: 12px; font-size: 16px; font-weight: bold; border-radius: 15px; cursor: pointer; width: 100%; margin-top: 15px; box-shadow: 0 4px 10px rgba(255, 107, 129, 0.2); }
         .ai-feedback { margin-top: 15px; padding: 15px; border-radius: 12px; display: none; font-weight: bold; font-size: 16px; }
+        
+        .flower-display { font-size: 22px; letter-spacing: 3px; display: inline-block; vertical-align: middle; min-height: 30px; }
     </style>
 </head>
 <body>
@@ -133,8 +139,9 @@
     </header>
 
     <div class="dashboard">
-        <div class="score-box"><i class="fa-solid fa-star"></i> Điểm bài học: <span id="total-score">0</span> / 10 điểm</div>
-        <div class="progress-box"><i class="fa-solid fa-flag"></i> Trạng thái: <span id="progress-text">Chưa hoàn thành</span></div>
+        <div class="score-box"><i class="fa-solid fa-star"></i> Bài tập chính thức: <span id="total-score">0</span> / 10 điểm</div>
+        <div class="bonus-score-box"><i class="fa-solid fa-floppy-disk"></i> Phần thưởng hoa: <span id="flower-pool" class="flower-display">Chưa tặng</span></div>
+        <div class="progress-box"><i class="fa-solid fa-flag"></i> Trạng thái bài học: <span id="progress-text">Chưa hoàn thành</span></div>
     </div>
 
     <div class="tabs">
@@ -142,6 +149,7 @@
         <button class="tab-btn" onclick="switchLesson(2)">Bài 2: Việc tốt</button>
     </div>
 
+    <!-- BÀI 1 -->
     <div id="lesson-1" class="lesson-container active">
         <div class="reading-panel">
             <audio id="audio-file-1" src="audio_bai1.mp3"></audio>
@@ -157,7 +165,7 @@
                 Núi xa lúp xúp chân mây,
                 Bờ sông khép lại, hàng cây thấp dần.
                 Nơi xa bỗng hóa nên gần,
-                Quanh em bè bạn, quây quần Lutheran bốn phương.
+                Quanh em bè bạn, quây quần bốn phương.
                 <div class="author-text">Tác giả: Trần Đăng Khoa</div>
                 <div class="note-text"><b>Chú thích:</b> <i>Lúp xúp</i> có nghĩa là nhiều vật liền nhau, thấp như nhau.</div>
             </div>
@@ -166,6 +174,7 @@
         <div class="exercise-panel">
             <div class="exercise-title"><i class="fa-solid fa-book-open"></i> BÀI TẬP CHÍNH THỨC (Thang điểm 10)</div>
             
+            <!-- Câu 1a -->
             <div class="quiz-box">
                 <div class="quiz-question">1. Đánh dấu ✕ vào ô trống trước ý đúng:</div>
                 <div class="quiz-question" style="color:#e67e22; font-size:15px;">a) Bạn nhỏ trong bài thơ thấy hình dáng của mình năm nay có gì khác trước?</div>
@@ -177,6 +186,7 @@
                 </div>
             </div>
 
+            <!-- Câu 1b -->
             <div class="quiz-box">
                 <div class="quiz-question" style="color:#e67e22; font-size:15px;">b) Khi lớn lên, bạn nhỏ thấy các vật xung quanh thế nào?</div>
                 <div class="option-group">
@@ -186,6 +196,7 @@
                 </div>
             </div>
 
+            <!-- Câu 1c -->
             <div class="quiz-box">
                 <div class="quiz-question" style="color:#e67e22; font-size:15px;">c) Qua hai dòng thơ cuối, em hiểu bạn nhỏ có thêm điều gì khi lớn lên?</div>
                 <div class="option-group">
@@ -195,6 +206,7 @@
                 </div>
             </div>
 
+            <!-- Câu 2 tự luận ngắn -->
             <div class="quiz-box">
                 <div class="quiz-question">2. Năm nay, em có những thay đổi gì giống bạn nhỏ trong bài thơ?</div>
                 <input type="text" id="q1-tuluat" placeholder="Nhập câu trả lời của con tại đây..." style="width: 100%;">
@@ -203,22 +215,26 @@
             <button class="btn-check" onclick="checkLesson1()">Nộp bài chấm điểm</button>
             <div id="feedback-1" class="ai-feedback"></div>
 
+            <!-- BÀI TẬP LÀM THÊM -->
             <div class="bonus-section">
-                <div class="bonus-title"><i class="fa-solid fa-star"></i> Bài Tập Làm Thêm (Vui Có Thưởng)</div>
+                <div class="bonus-title"><i class="fa-solid fa-gift"></i> Bài Tập Làm Thêm (Tổng số: 2 hoa 🌸)</div>
                 <div class="quiz-box" style="background:transparent; box-shadow:none; padding:0;">
-                    <p style="margin-bottom:10px; font-weight:bold;">Kéo từ đúng vào ô giải nghĩa:</p>
+                    <p style="margin-bottom:10px; font-weight:bold; color: #B0124A;">Câu 1: Kéo từ đúng vào ô giải nghĩa để nhận 1 hoa:</p>
                     <div class="drag-zone">
                         <div class="drag-item" draggable="true" id="drag1">lúp xúp</div>
                     </div>
-                    <p>Nhiều vật liền nhau, thấp đều nhau gọi là: <div class="drop-target" data-answer="drag1"></div></p>
+                    <p style="margin-bottom: 15px;">Nhiều vật liền nhau, thấp đều nhau gọi là: <div class="drop-target" data-answer="drag1"></div></p>
                     
-                    <p style="margin-top:15px; margin-bottom:10px; font-weight:bold;">Điền từ thích hợp vào chỗ trống:</p>
-                    <p>Năm nay con không còn <input type="text" id="blank1" placeholder="..." style="width: 100px;"> như hồi lên năm.</p>
+                    <p style="margin-top:20px; margin-bottom:10px; font-weight:bold; color: #B0124A;">Câu 2: Điền từ thích hợp vào chỗ trống để nhận 1 hoa:</p>
+                    <p>Năm nay con không còn <input type="text" id="blank1" placeholder="..." style="width: 110px; text-align: center;"> như hồi lên năm.</p>
                 </div>
+                <button class="btn-bonus-check" onclick="checkBonusLesson1()">Nộp bài tập làm thêm</button>
+                <div id="bonus-feedback-1" class="ai-feedback"></div>
             </div>
         </div>
     </div>
 
+    <!-- BÀI 2 -->
     <div id="lesson-2" class="lesson-container">
         <div class="reading-panel">
             <audio id="audio-file-2" src="audio_bai2.mp3"></audio>
@@ -238,6 +254,7 @@
         <div class="exercise-panel">
             <div class="exercise-title"><i class="fa-solid fa-book-open"></i> BÀI TẬP CHÍNH THỨC (Thang điểm 10)</div>
 
+            <!-- Câu 1 dạng bảng tích -->
             <div class="quiz-box">
                 <div class="quiz-question">1. Nội dung nào dưới đây KHÔNG PHẢI là việc tốt Hùng đã làm trong ngày chủ nhật? Đánh dấu ✕ vào ô trống:</div>
                 <table class="quiz-table">
@@ -264,6 +281,7 @@
                 </table>
             </div>
 
+            <!-- Câu 2 -->
             <div class="quiz-box">
                 <div class="quiz-question">2. Vì sao Hùng nghĩ những việc em đã làm chưa phải việc tốt? Đánh dấu ✕ vào trước ý đúng:</div>
                 <div class="option-group">
@@ -273,6 +291,7 @@
                 </div>
             </div>
 
+            <!-- Câu 3 -->
             <div class="quiz-box">
                 <div class="quiz-question">3. Theo em, vì sao cô giáo lại khen Hùng đã làm được ba việc tốt? Đánh dấu ✕ vào trước ý đúng:</div>
                 <div class="option-group">
@@ -285,12 +304,15 @@
             <button class="btn-check" onclick="checkLesson2()">Nộp bài chấm điểm</button>
             <div id="feedback-2" class="ai-feedback"></div>
 
+            <!-- BÀI TẬP LÀM THÊM -->
             <div class="bonus-section">
-                <div class="bonus-title"><i class="fa-solid fa-star"></i> Bài Tập Làm Thêm (Vui Có Thưởng)</div>
+                <div class="bonus-title"><i class="fa-solid fa-gift"></i> Bài Tập Làm Thêm (Tổng số: 1 hoa 🌸)</div>
                 <div class="quiz-box" style="background:transparent; box-shadow:none; padding:0;">
-                    <p style="font-weight:bold; margin-bottom:8px;">Tập viết câu kể việc tốt của con ở nhà:</p>
-                    <input type="text" id="ai-input" placeholder="Ví dụ: Con đã giúp mẹ gấp quần áo sạch..." style="width: 100%;">
+                    <p style="font-weight:bold; margin-bottom:8px; color: #B0124A;">Câu 1: Tập viết câu kể một việc tốt con đã tự làm ở nhà (Viết từ 5 chữ trở lên để nhận 1 hoa):</p>
+                    <input type="text" id="ai-input" placeholder="Ví dụ: Con đã giúp mẹ gấp quần áo sạch gọn gàng..." style="width: 100%;">
                 </div>
+                <button class="btn-bonus-check" onclick="checkBonusLesson2()">Nộp bài tập làm thêm</button>
+                <div id="bonus-feedback-2" class="ai-feedback"></div>
             </div>
         </div>
     </div>
@@ -300,6 +322,10 @@
 
         // --- HỆ THỐNG KÉO THẢ ---
         document.addEventListener("DOMContentLoaded", () => {
+            initDragAndDrop();
+        });
+
+        function initDragAndDrop() {
             const dragItems = document.querySelectorAll(".drag-item");
             const dropTargets = document.querySelectorAll(".drop-target");
 
@@ -320,7 +346,7 @@
                     }
                 });
             });
-        });
+        }
 
         function playRealAudio(lessonNum) {
             document.querySelectorAll('audio').forEach(aud => {
@@ -338,23 +364,15 @@
             audio.onended = () => { btn.innerHTML = '<i class="fa-solid fa-circle-play"></i> BẤM ĐỂ NGHE BÀI ĐỌC'; };
         }
 
-        // --- HỆ THỐNG PHÁT FILE ÂM THANH THỰC TẾ TRÊN SERVER ---
-        function playBeep(type) {
+        // --- HỆ THỐNG PHÁT FILE ÂM THANH THỰC TẾ ---
+        function playSound(file) {
             try {
-                let audioSuccess = new Audio('correct.mp3');
-                let audioFail = new Audio('incorrect.mp3');
-
-                if (type === 'success') {
-                    audioSuccess.play().catch(function(error) {
-                        console.log("Trình duyệt chặn hoặc thiếu file: correct.mp3", error);
-                    });
-                } else {
-                    audioFail.play().catch(function(error) {
-                        console.log("Trình duyệt chặn hoặc thiếu file: incorrect.mp3", error);
-                    });
-                }
+                let audio = new Audio(file);
+                audio.play().catch(function(error) {
+                    console.log("Trình duyệt chặn phát tự động hoặc thiếu file: " + file, error);
+                });
             } catch(e) {
-                console.log("Lỗi hệ thống phát âm thanh: ", e);
+                console.log("Lỗi hệ thống âm thanh: ", e);
             }
         }
 
@@ -364,14 +382,18 @@
             document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
             document.getElementById(`lesson-${lessonNum}`).classList.add('active');
             event.target.classList.add('active');
+            
+            // Dừng âm thanh
             document.querySelectorAll('audio').forEach(aud => { aud.pause(); aud.currentTime = 0; });
             document.querySelectorAll('.audio-btn').forEach(btn => { btn.innerHTML = '<i class="fa-solid fa-circle-play"></i> BẤM ĐỂ NGHE BÀI ĐỌC'; });
             
+            // Reset Dashboard thị giác
             document.getElementById('total-score').innerText = "0";
+            document.getElementById('flower-pool').innerHTML = "Chưa tặng";
             document.getElementById('progress-text').innerText = "Chưa hoàn thành";
         }
 
-        // --- KIỂM TRA ĐÁP ÁN BÀI 1 ---
+        // --- KIỂM TRA ĐÁP ÁN BÀI 1: CHÍNH THỨC ---
         function checkLesson1() {
             let coreCorrectCount = 0;
             const totalCoreQuestions = 4; 
@@ -401,31 +423,68 @@
             
             fb.style.display = "block";
             if(finalScore === 10) {
-                playBeep('success');
+                playSound('correct.mp3');
                 document.getElementById('progress-text').innerText = "Đã hoàn thành Xuất Sắc! 🎉";
                 fb.style.backgroundColor = "#D4EDDA"; fb.style.color = "#155724";
                 fb.innerHTML = `🎉 Tuyệt vời! Con đã trả lời đúng hết bài tập chính thức và đạt ${finalScore}/10 điểm.`;
             } else {
-                playBeep('fail');
+                playSound('incorrect.mp3');
                 document.getElementById('progress-text').innerText = "Đang làm bài";
                 fb.style.backgroundColor = "#FFF3CD"; fb.style.color = "#856404";
                 fb.innerHTML = `✍️ Con đạt được ${finalScore}/10 điểm bài học chính thức. Hãy soát lại các câu chưa chính xác nhé!`;
             }
-
-            const target = document.querySelector('#lesson-1 .drop-target');
-            const child = target.firstElementChild;
-            const b1 = document.getElementById('blank1');
-            if(child && child.id === target.getAttribute('data-answer')) target.style.borderColor = "#2ED573";
-            if(b1.value.trim() === "nhỏ xíu") b1.className = "input-success";
         }
 
-        // --- KIỂM TRA ĐÁP ÁN BÀI 2 ---
+        // --- KIỂM TRA BÀI TẬP LÀM THÊM BÀI 1 (Tổng 2 Hoa) ---
+        function checkBonusLesson1() {
+            let flowerCount = 0;
+            const totalFlowers = 2;
+            const fbBonus = document.getElementById('bonus-feedback-1');
+
+            // Câu kéo thả lúp xúp
+            const target = document.querySelector('#lesson-1 .drop-target');
+            const child = target.firstElementChild;
+            if(child && child.id === target.getAttribute('data-answer')) {
+                target.style.borderColor = "#2ED573";
+                target.style.background = "#D4EDDA";
+                flowerCount++;
+            } else {
+                target.style.borderColor = "#FF4757";
+            }
+
+            // Câu điền khuyết "nhỏ xíu"
+            const b1 = document.getElementById('blank1');
+            if(b1.value.trim().toLowerCase() === "nhỏ xíu") {
+                b1.className = "input-success";
+                flowerCount++;
+            } else {
+                b1.className = "input-error";
+            }
+
+            // Cập nhật hiển thị hoa lên dashboard
+            let flowerHtml = "";
+            for(let i=0; i<flowerCount; i++) { flowerHtml += "🌸"; }
+            for(let i=flowerCount; i<totalFlowers; i++) { flowerHtml += "⚪"; }
+            document.getElementById('flower-pool').innerHTML = `${flowerHtml} (${flowerCount}/${totalFlowers})`;
+
+            fbBonus.style.display = "block";
+            if(flowerCount === totalFlowers) {
+                playSound('bravo.mp3'); // Tiếng vỗ tay khen thưởng bài làm thêm
+                fbBonus.style.backgroundColor = "#E8F8F5"; fbBonus.style.color = "#117864";
+                fbBonus.innerHTML = `👏 Thật đáng khen! Con đã xuất sắc hoàn thành tất cả bài tập làm thêm và nhận trọn vẹn 2 bông hoa đỏ!`;
+            } else {
+                playSound('incorrect.mp3');
+                fbBonus.style.backgroundColor = "#FADBD8"; fbBonus.style.color = "#78281F";
+                fbBonus.innerHTML = `⚠️ Con nhận được ${flowerCount}/${totalFlowers} bông hoa. Có câu làm thêm chưa chính xác, con thử lại nhé!`;
+            }
+        }
+
+        // --- KIỂM TRA ĐÁP ÁN BÀI 2: CHÍNH THỨC ---
         function checkLesson2() {
             let coreCorrectCount = 0;
             const totalCoreQuestions = 3; 
             const fb = document.getElementById('feedback-2');
 
-            // Câu hỏi phủ định: Tích chọn duy nhất ý a (Quét nhà không phải việc Hùng làm)
             const cbA = document.querySelector('input[name="q2_1"][value="a"]').checked;
             const cbB = document.querySelector('input[name="q2_1"][value="b"]').checked;
             const cbC = document.querySelector('input[name="q2_1"][value="c"]').checked;
@@ -445,24 +504,49 @@
 
             document.getElementById('total-score').innerText = finalScore;
 
-            const bonusText = document.getElementById('ai-input').value.trim();
-            let bonusMsg = "";
-            if(bonusText.length > 2) {
-                bonusMsg = "<br>⭐ <b>Bài làm thêm:</b> Câu chuyện về việc tốt của con rất ý nghĩa và đáng khen!";
-                document.getElementById('ai-input').className = "input-success";
-            }
-
             fb.style.display = "block";
             if(finalScore === 10) {
-                playBeep('success');
+                playSound('correct.mp3');
                 document.getElementById('progress-text').innerText = "Đã hoàn thành Xuất Sắc! 🎉";
                 fb.style.backgroundColor = "#D4EDDA"; fb.style.color = "#155724";
-                fb.innerHTML = `🎉 Hoan hô! Con đã hoàn thành xuất sắc các bài tập chính thức! Điểm số tuyệt đối: ${finalScore}/10 điểm.` + bonusMsg;
+                fb.innerHTML = `🎉 Hoan hô! Con đã hoàn thành xuất sắc các bài tập chính thức! Điểm số tuyệt đối: ${finalScore}/10 điểm.`;
             } else {
-                playBeep('fail');
+                playSound('incorrect.mp3');
                 document.getElementById('progress-text').innerText = "Đang làm bài";
                 fb.style.backgroundColor = "#FFF3CD"; fb.style.color = "#856404";
-                fb.innerHTML = `✍️ Con đạt được ${finalScore}/10 điểm bài học chính thức. Hãy thử đọc lại câu chuyện để sửa lại đáp án đúng nhé!` + bonusMsg;
+                fb.innerHTML = `✍️ Con đạt được ${finalScore}/10 điểm bài học chính thức. Hãy thử đọc lại câu chuyện để sửa lại đáp án đúng nhé!`;
+            }
+        }
+
+        // --- KIỂM TRA BÀI TẬP LÀM THÊM BÀI 2 (Tổng 1 Hoa) ---
+        function checkBonusLesson2() {
+            let flowerCount = 0;
+            const totalFlowers = 1;
+            const fbBonus = document.getElementById('bonus-feedback-2');
+            const bonusText = document.getElementById('ai-input').value.trim();
+
+            if(bonusText.length >= 5) {
+                document.getElementById('ai-input').className = "input-success";
+                flowerCount++;
+            } else {
+                document.getElementById('ai-input').className = "input-error";
+            }
+
+            // Hiển thị hoa lên bảng dashboard
+            let flowerHtml = "";
+            for(let i=0; i<flowerCount; i++) { flowerHtml += "🌸"; }
+            for(let i=flowerCount; i<totalFlowers; i++) { flowerHtml += "⚪"; }
+            document.getElementById('flower-pool').innerHTML = `${flowerHtml} (${flowerCount}/${totalFlowers})`;
+
+            fbBonus.style.display = "block";
+            if(flowerCount === totalFlowers) {
+                playSound('bravo.mp3'); // Tiếng vỗ tay khen thưởng
+                fbBonus.style.backgroundColor = "#E8F8F5"; fbBonus.style.color = "#117864";
+                fbBonus.innerHTML = `👏 Câu chuyện việc tốt của con rất đáng khen! Tặng con 1 bông hoa đỏ lấp lánh nhé!`;
+            } else {
+                playSound('incorrect.mp3');
+                fbBonus.style.backgroundColor = "#FADBD8"; fbBonus.style.color = "#78281F";
+                fbBonus.innerHTML = `⚠️ Con cần viết câu dài và rõ ràng hơn một chút (từ 5 chữ trở lên) để nhận hoa thưởng từ bài tập này nhé!`;
             }
         }
     </script>
