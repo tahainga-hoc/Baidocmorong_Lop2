@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Học Tiếng Việt Tương Tác</title>
+    <!-- Tự tạo favicon bằng biểu tượng emoji cuốn sách mà không cần file favicon.ico bên ngoài -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4CAF50;
+            --secondary-color: #FF9800;
+            --bg-color: #f4f9f4;
+            --text-color: #333;
+            --card-bg: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            padding: 20px;
+        }
+
+        /* Tự biến đổi màu sắc sinh động bằng code thay cho file hình nền bg_header.jpg */
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #4CAF50, #8BC34A, #FF9800);
+            background-size: 200% 200%;
+            animation: gradientBg 10s ease infinite;
+            padding: 30px 20px;
+            border-radius: 15px;
+            color: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        @keyframes gradientBg {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .dashboard {
+            display: flex;
+            justify-content: space-around;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .score-box { color: var(--secondary-color); }
+        .progress-box { color: var(--primary-color); }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .tab-btn {
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            background-color: #ddd;
+            transition: all 0.3s;
+        }
+
+        .tab-btn.active {
+            background-color: var(--primary-color);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .lesson-container {
+            display: none;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+
+        .lesson-container.active {
+            display: grid;
+        }
+
+        @media (max-width: 900px) {
+            .lesson-container { grid-template-columns: 1fr; }
+        }
+
+        .reading-panel {
+            background: #fffef2;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid var(--secondary-color);
+        }
+
+        .audio-btn {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .audio-btn:hover { opacity: 0.9; }
+
+        .text-content {
+            font-size: 18px;
+            line-height: 1.8;
+            white-space: pre-line;
+        }
+
+        .highlight {
+            background-color: #fff3cd;
+            transition: background-color 0.3s;
+        }
+
+        .exercise-panel {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .exercise-title {
+            font-size: 18px;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #ddd;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .quiz-box {
+            margin-bottom: 25px;
+        }
+
+        .drag-zone {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .drag-item {
+            background: #e3f2fd;
+            border: 2px dashed #2196f3;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: move;
+            font-weight: bold;
+        }
+
+        .drop-target {
+            background: #eee;
+            border: 2px solid #ccc;
+            min-width: 120px;
+            min-height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 5px;
+            padding: 5px;
+            vertical-align: middle;
+        }
+
+        input[type="text"], select {
+            padding: 6px 12px;
+            font-size: 16px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            margin: 0 5px;
+            outline: none;
+        }
+
+        input[type="text"]:focus, select:focus {
+            border-color: var(--primary-color);
+        }
+
+        .input-error { border-color: #f44336 !important; background-color: #ffebee; }
+        .input-success { border-color: #4CAF50 !important; background-color: #e8f5e9; }
+
+        .btn-check {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .ai-feedback {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1><i class="fa-solid fa-book-open-reader"></i> HỆ THỐNG LUYỆN VIẾT TIẾNG VIỆT TƯƠNG TÁC</h1>
+        <p>Ứng dụng học tập thông minh phong cách Movers</p>
+    </header>
+
+    <div class="dashboard">
+        <div class="score-box"><i class="fa-solid fa-star"></i> Điểm số: <span id="total-score">0</span> xu</div>
+        <div class="progress-box"><i class="fa-solid fa-trophy"></i> Tiến độ: <span id="progress-text">0/2</span> bài</div>
+    </div>
+
+    <div class="tabs">
+        <button class="tab-btn active" onclick="switchLesson(1)">Bài 1: Em lớn lên từng ngày</button>
+        <button class="tab-btn" onclick="switchLesson(2)">Bài 2: Đi học vui sao</button>
+    </div>
+
+    <!-- Bài 1 -->
+    <div id="lesson-1" class="lesson-container active">
+        <div class="reading-panel">
+            <button class="audio-btn" onclick="playMockAudio('text-b1')"><i class="fa-solid fa-volume-high"></i> Nghe giọng đọc bài thơ</button>
+            <div id="text-b1" class="text-content">
+                Mỗi năm một lớp học
+                Em lớn thêm từng ngày
+                Tự thắt dây giày nhỏ
+                Tự đeo ba lô này.
+
+                Trang sách thơm tươm tất
+                Chữ viết đều thẳng ngay
+                Chào lớp hai thân mến
+                Em tự lập từ đây!
+            </div>
+        </div>
+
+        <div class="exercise-panel">
+            <div class="quiz-box">
+                <div class="exercise-title"><i class="fa-solid fa-puzzle-piece"></i> Thử thách 1: Kéo thả từ đúng vào ô nghĩa</div>
+                <div class="drag-zone">
+                    <div class="drag-item" draggable="true" ondragstart="drag(event)" id="drag1">tươm tất</div>
+                    <div class="drag-item" draggable="true" ondragstart="drag(event)" id="drag2">tự lập</div>
+                </div>
+                <p style="margin-bottom: 10px;">1. Tự mình làm công việc, không dựa dẫm: <div class="drop-target" ondrop="drop(event)" ondragover="allowDrop(event)" data-answer="drag2"></div></p>
+                <p>2. Gọn gàng, sạch đẹp và ngay ngắn: <div class="drop-target" ondrop="drop(event)" ondragover="allowDrop(event)" data-answer="drag1"></div></p>
+            </div>
+
+            <div class="quiz-box">
+                <div class="exercise-title"><i class="fa-solid fa-pen-to-square"></i> Thử thách 2: Điền một từ chính xác vào chỗ trống</div>
+                <p>Năm nay em bước vào học lớp <input type="text" id="blank1" placeholder="...?" style="width: 80px;">. Buổi sáng đi học, em luôn sửa sang quần áo cho thật gọn gàng, <input type="text" id="blank2" placeholder="...?" style="width: 100px;">.</p>
+            </div>
+
+            <button class="btn-check" onclick="checkLesson1()">Kiểm tra kết quả Bài 1</button>
+            <div id="feedback-1" class="ai-feedback"></div>
+        </div>
+    </div>
+
+    <!-- Bài 2 -->
+    <div id="lesson-2" class="lesson-container">
+        <div class="reading-panel">
+            <button class="audio-btn" onclick="playMockAudio('text-b2')"><i class="fa-solid fa-volume-high"></i> Nghe giọng đọc câu chuyện</button>
+            <div id="text-b2" class="text-content">
+                Hôm nay là tiết học vẽ của lớp hai. Thầy giáo hướng dẫn cả lớp vẽ một bức tranh về cảnh bình minh trên quê hương. 
+
+                Bạn Nam hào hứng cầm bút màu đỏ tô điểm cho ông mặt trời rực rỡ. Bạn Hoa vẽ thêm những chú chim nhỏ đang bay lượn quanh mái trường. Tiết học trôi qua thật vui vẻ và tràn ngập tiếng cười.
+            </div>
+        </div>
+
+        <div class="exercise-panel">
+            <div class="quiz-box">
+                <div class="exercise-title"><i class="fa-solid fa-list-check"></i> Thử thách 1: Chọn từ thích hợp để hoàn thành đoạn văn</div>
+                <p>
+                    Tiết học vẽ hôm nay vô cùng 
+                    <select id="select1">
+                        <option value="">--Chọn--</option>
+                        <option value="vui">vui vẻ</option>
+                        <option value="buon">buồn bã</option>
+                    </select>. 
+                    Các bạn hào hứng dùng 
+                    <select id="select2">
+                        <option value="">--Chọn--</option>
+                        <option value="sach">quyển sách</option>
+                        <option value="but">bút màu</option>
+                    </select> để vẽ tranh.
+                </p>
+            </div>
+
+            <div class="quiz-box">
+                <div class="exercise-title"><i class="fa-solid fa-robot"></i> Thử thách 2: Trí tuệ nhân tạo (AI) chấm câu tự do</div>
+                <label style="display:block; margin-bottom:8px; font-weight:bold;">Hãy viết 1 câu mô tả cảm xúc của các bạn nhỏ trong tiết học vẽ:</label>
+                <input type="text" id="ai-input" placeholder="Ví dụ: Các bạn nhỏ học vẽ rất vui vẻ." style="width: 100%; padding: 10px;">
+            </div>
+
+            <button class="btn-check" onclick="checkLesson2()">Kiểm tra kết quả Bài 2</button>
+            <div id="feedback-2" class="ai-feedback"></div>
+        </div>
+    </div>
+
+    <script>
+        let currentScore = 0;
+        let completedLessons = new Set();
+        let audioCtx = null;
+
+        // Hàm tự động phát âm thanh điện tử kỹ thuật số bằng thuật toán (Không cần file mp3 bên ngoài)
+        function playBeep(type) {
+            try {
+                if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                let osc = audioCtx.createOscillator();
+                let gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                if (type === 'success') {
+                    osc.frequency.setValueAtTime(523.25, audioCtx.currentTime); // Nốt Đô
+                    osc.frequency.setValueAtTime(659.25, audioCtx.currentTime + 0.1); // Nốt Mi
+                    gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+                    osc.start();
+                    osc.stop(audioCtx.currentTime + 0.25);
+                } else if (type === 'fail') {
+                    osc.frequency.setValueAtTime(220, audioCtx.currentTime); // Âm trầm báo sai
+                    gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+                    osc.start();
+                    osc.stop(audioCtx.currentTime + 0.2);
+                }
+            } catch(e) { console.log("Trình duyệt chặn phát âm thanh tự động"); }
+        }
+
+        function switchLesson(lessonNum) {
+            document.querySelectorAll('.lesson-container').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById(`lesson-${lessonNum}`).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function playMockAudio(elementId) {
+            const panel = document.getElementById(elementId);
+            const originalText = panel.innerText;
+            const words = originalText.split(/(\s+)/);
+            panel.innerHTML = '';
+            words.forEach(word => {
+                if(word.trim() === "") {
+                    panel.appendChild(document.createTextNode(word));
+                } else {
+                    let span = document.createElement('span');
+                    span.innerText = word;
+                    panel.appendChild(span);
+                }
+            });
+            let spans = panel.querySelectorAll('span');
+            let index = 0;
+            let interval = setInterval(() => {
+                if(index > 0) spans[index-1].classList.remove('highlight');
+                if(index < spans.length) {
+                    spans[index].classList.add('highlight');
+                    index++;
+                } else {
+                    clearInterval(interval);
+                    panel.innerText = originalText;
+                }
+            }, 250);
+        }
+
+        function allowDrop(ev) { ev.preventDefault(); }
+        function drag(ev) { ev.dataTransfer.setData("text", ev.target.id); }
+        function drop(ev) {
+            ev.preventDefault();
+            var data = ev.dataTransfer.getData("text");
+            if (ev.target.innerHTML === "") {
+                ev.target.appendChild(document.getElementById(data));
+            }
+        }
+
+        function checkLesson1() {
+            let scoreEarned = 0;
+            let isCorrect = true;
+            const fb = document.getElementById('feedback-1');
+            const targets = document.querySelectorAll('#lesson-1 .drop-target');
+            
+            targets.forEach(target => {
+                const child = target.firstElementChild;
+                if(child && child.id === target.getAttribute('data-answer')) {
+                    target.style.borderColor = "#4CAF50";
+                    scoreEarned += 10;
+                } else {
+                    target.style.borderColor = "#f44336";
+                    isCorrect = false;
+                }
+            });
+
+            const b1 = document.getElementById('blank1');
+            const b2 = document.getElementById('blank2');
+
+            if(b1.value.trim() === "hai") { b1.className = "input-success"; scoreEarned += 10; } 
+            else { b1.className = "input-error"; isCorrect = false; }
+
+            if(b2.value.trim().toLowerCase() === "tươm tất") { b2.className = "input-success"; scoreEarned += 10; } 
+            else { b2.className = "input-error"; isCorrect = false; }
+
+            fb.style.display = "block";
+            if(isCorrect) {
+                playBeep('success');
+                fb.style.backgroundColor = "#e8f5e9"; fb.style.color = "#2e7d32";
+                fb.innerHTML = "🎉 Tuyệt vời! Bạn đã làm đúng hết các thử thách bài 1.";
+                if(!completedLessons.has(1)) { currentScore += scoreEarned; completedLessons.add(1); }
+            } else {
+                playBeep('fail');
+                fb.style.backgroundColor = "#ffebee"; fb.style.color = "#c62828";
+                fb.innerHTML = "✍️ Có một vài chỗ chưa chính xác. Hãy kiểm tra lại nhé!";
+            }
+            updateDashboard();
+        }
+
+        function checkLesson2() {
+            let scoreEarned = 0;
+            let isCorrect = true;
+            const fb = document.getElementById('feedback-2');
+            const s1 = document.getElementById('select1');
+            const s2 = document.getElementById('select2');
+
+            if(s1.value === "vui") { s1.className = "input-success"; scoreEarned += 10; } 
+            else { s1.className = "input-error"; isCorrect = false; }
+
+            if(s2.value === "but") { s2.className = "input-success"; scoreEarned += 10; } 
+            else { s2.className = "input-error"; isCorrect = false; }
+
+            const aiInput = document.getElementById('ai-input').value.trim();
+            let aiMsg = "";
+
+            if(aiInput === "") {
+                isCorrect = false;
+                aiMsg = "<br>⚠️ Bạn chưa điền câu trả lời cho AI chấm.";
+            } else if (aiInput.includes("vui vẽ")) {
+                isCorrect = false;
+                aiMsg = "<br>🤖 <b>AI nhắc nhở:</b> Con chú ý viết đúng chính tả từ <b>'vui vẻ'</b> (dấu hỏi) nhé!";
+                document.getElementById('ai-input').className = "input-error";
+            } else {
+                scoreEarned += 20;
+                aiMsg = "<br>🤖 <b>AI khen ngợi:</b> Câu văn rất chuẩn và hay! ⭐⭐⭐";
+                document.getElementById('ai-input').className = "input-success";
+            }
+
+            fb.style.display = "block";
+            if(isCorrect) {
+                playBeep('success');
+                fb.style.backgroundColor = "#e8f5e9"; fb.style.color = "#2e7d32";
+                fb.innerHTML = "🎉 Chúc mừng bạn đã hoàn thành Bài 2!" + aiMsg;
+                if(!completedLessons.has(2)) { currentScore += scoreEarned; completedLessons.add(2); }
+            } else {
+                playBeep('fail');
+                fb.style.backgroundColor = "#ffebee"; fb.style.color = "#c62828";
+                fb.innerHTML = "✍️ Thử lại một chút bạn nhé!" + aiMsg;
+            }
+            updateDashboard();
+        }
+
+        function updateDashboard() {
+            document.getElementById('total-score').innerText = currentScore;
+            document.getElementById('progress-text').innerText = `${completedLessons.size}/2`;
+        }
+    </script>
+</body>
+</html>
