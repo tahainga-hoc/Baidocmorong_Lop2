@@ -149,10 +149,9 @@
         <button class="tab-btn" onclick="switchLesson(2)">Bài 2: Việc tốt</button>
     </div>
 
-    <!-- BÀI 1 -->
     <div id="lesson-1" class="lesson-container active">
         <div class="reading-panel">
-            <audio id="audio-file-1" src="audio_bai1.mp3"></audio>
+            <audio id="audio-file-1" src="audio_bai1.mp3" preload="auto"></audio>
             <button class="audio-btn" onclick="playRealAudio(1)"><i class="fa-solid fa-circle-play"></i> BẤM ĐỂ NGHE BÀI ĐỌC</button>
             <div class="img-container"><img src="minhhoa_bai1.png" alt="Hình minh họa bài 1"></div>
             <div class="text-content">
@@ -174,9 +173,8 @@
         <div class="exercise-panel">
             <div class="exercise-title"><i class="fa-solid fa-book-open"></i> BÀI TẬP CHÍNH THỨC (Thang điểm 10)</div>
             
-            <!-- Câu 1a -->
             <div class="quiz-box">
-                <div class="quiz-question">1. Đánh dấu ✕ vào ô trống trước ý đúng:</div>
+                <div class="quiz-question">1. Bấm chọn vào ô trước ý trả lời đúng:</div>
                 <div class="quiz-question" style="color:#e67e22; font-size:15px;">a) Bạn nhỏ trong bài thơ thấy hình dáng của mình năm nay có gì khác trước?</div>
                 <div class="option-group">
                     <label class="option-label"><input type="radio" name="q1a" value="1"> Thấy bầu trời bớt xa xăm hơn.</label>
@@ -186,7 +184,6 @@
                 </div>
             </div>
 
-            <!-- Câu 1b -->
             <div class="quiz-box">
                 <div class="quiz-question" style="color:#e67e22; font-size:15px;">b) Khi lớn lên, bạn nhỏ thấy các vật xung quanh thế nào?</div>
                 <div class="option-group">
@@ -196,7 +193,6 @@
                 </div>
             </div>
 
-            <!-- Câu 1c -->
             <div class="quiz-box">
                 <div class="quiz-question" style="color:#e67e22; font-size:15px;">c) Qua hai dòng thơ cuối, em hiểu bạn nhỏ có thêm điều gì khi lớn lên?</div>
                 <div class="option-group">
@@ -206,7 +202,6 @@
                 </div>
             </div>
 
-            <!-- Câu 2 tự luận ngắn -->
             <div class="quiz-box">
                 <div class="quiz-question">2. Năm nay, em có những thay đổi gì giống bạn nhỏ trong bài thơ?</div>
                 <input type="text" id="q1-tuluat" placeholder="Nhập câu trả lời của con tại đây..." style="width: 100%;">
@@ -215,7 +210,6 @@
             <button class="btn-check" onclick="checkLesson1()">Nộp bài chấm điểm</button>
             <div id="feedback-1" class="ai-feedback"></div>
 
-            <!-- BÀI TẬP LÀM THÊM -->
             <div class="bonus-section">
                 <div class="bonus-title"><i class="fa-solid fa-gift"></i> Bài Tập Làm Thêm (Tổng số: 2 hoa 🌸)</div>
                 <div class="quiz-box" style="background:transparent; box-shadow:none; padding:0;">
@@ -234,10 +228,9 @@
         </div>
     </div>
 
-    <!-- BÀI 2 -->
     <div id="lesson-2" class="lesson-container">
         <div class="reading-panel">
-            <audio id="audio-file-2" src="audio_bai2.mp3"></audio>
+            <audio id="audio-file-2" src="audio_bai2.mp3" preload="auto"></audio>
             <button class="audio-btn" onclick="playRealAudio(2)"><i class="fa-solid fa-circle-play"></i> BẤM ĐỂ NGHE BÀI ĐỌC</button>
             <div class="img-container"><img src="minhhoa_bai2.png" alt="Hình minh họa bài 2"></div>
             <div class="text-content">
@@ -254,9 +247,8 @@
         <div class="exercise-panel">
             <div class="exercise-title"><i class="fa-solid fa-book-open"></i> BÀI TẬP CHÍNH THỨC (Thang điểm 10)</div>
 
-            <!-- Câu 1 dạng bảng tích -->
             <div class="quiz-box">
-                <div class="quiz-question">1. Nội dung nào dưới đây KHÔNG PHẢI là việc tốt Hùng đã làm trong ngày chủ nhật? Đánh dấu ✕ vào ô trống:</div>
+                <div class="quiz-question">1. Nội dung nào dưới đây KHÔNG PHẢI là việc tốt Hùng đã làm trong ngày chủ nhật? Tích chọn vào ô vuông trống tương ứng:</div>
                 <table class="quiz-table">
                     <tr>
                         <th>Nội dung việc làm</th>
@@ -281,9 +273,8 @@
                 </table>
             </div>
 
-            <!-- Câu 2 -->
             <div class="quiz-box">
-                <div class="quiz-question">2. Vì sao Hùng nghĩ những việc em đã làm chưa phải việc tốt? Đánh dấu ✕ vào trước ý đúng:</div>
+                <div class="quiz-question">2. Vì sao Hùng nghĩ những việc em đã làm chưa phải việc tốt? Bấm chọn vào ô trước ý đúng:</div>
                 <div class="option-group">
                     <label class="option-label"><input type="radio" name="q2_2" value="1"> Vì đó là những việc nhỏ, bình thường, ai cũng có thể làm được.</label>
                     <label class="option-label"><input type="radio" name="q2_2" value="2"> Vì Hùng chưa quét được nhà giúp mẹ và chị.</label>
@@ -291,9 +282,8 @@
                 </div>
             </div>
 
-            <!-- Câu 3 -->
             <div class="quiz-box">
-                <div class="quiz-question">3. Theo em, vì sao cô giáo lại khen Hùng đã làm được ba việc tốt? Đánh dấu ✕ vào trước ý đúng:</div>
+                <div class="quiz-question">3. Theo em, vì sao cô giáo lại khen Hùng đã làm được ba việc tốt? Bấm chọn vào ô trước ý đúng:</div>
                 <div class="option-group">
                     <label class="option-label"><input type="radio" name="q2_3" value="1"> Vì đó tuy là việc nhỏ nhưng đem lại niềm vui, sự giúp đỡ thiết thực cho mọi người.</label>
                     <label class="option-label"><input type="radio" name="q2_3" value="2"> Vì Hùng biết nhận lỗi trước cô giáo và các bạn.</label>
@@ -304,7 +294,6 @@
             <button class="btn-check" onclick="checkLesson2()">Nộp bài chấm điểm</button>
             <div id="feedback-2" class="ai-feedback"></div>
 
-            <!-- BÀI TẬP LÀM THÊM -->
             <div class="bonus-section">
                 <div class="bonus-title"><i class="fa-solid fa-gift"></i> Bài Tập Làm Thêm (Tổng số: 1 hoa 🌸)</div>
                 <div class="quiz-box" style="background:transparent; box-shadow:none; padding:0;">
@@ -320,7 +309,16 @@
     <script>
         let activeLesson = 1;
 
-        // --- HỆ THỐNG KÉO THẢ ---
+        // --- KHỞI TẠO SẴN ĐỐI TƯỢNG ÂM THANH ĐỂ PHẢN HỒI LẬP TỨC KHÔNG TRỄ ---
+        const soundCorrect = new Audio('correct.mp3');
+        const soundIncorrect = new Audio('incorrect.mp3');
+        const soundBravo = new Audio('bravo.mp3');
+
+        // Ép tải trước các hiệu ứng âm thanh hệ thống
+        soundCorrect.load();
+        soundIncorrect.load();
+        soundBravo.load();
+
         document.addEventListener("DOMContentLoaded", () => {
             initDragAndDrop();
         });
@@ -364,12 +362,12 @@
             audio.onended = () => { btn.innerHTML = '<i class="fa-solid fa-circle-play"></i> BẤM ĐỂ NGHE BÀI ĐỌC'; };
         }
 
-        // --- HỆ THỐNG PHÁT FILE ÂM THANH THỰC TẾ ---
-        function playSound(file) {
+        // --- HỆ THỐNG PHÁT THƯ VIỆN ĐÃ ĐƯỢC CACHE SẴN ---
+        function playSystemSound(soundObj) {
             try {
-                let audio = new Audio(file);
-                audio.play().catch(function(error) {
-                    console.log("Trình duyệt chặn phát tự động hoặc thiếu file: " + file, error);
+                soundObj.currentTime = 0; // Tua nhanh về đầu nếu nhấn liên tục
+                soundObj.play().catch(function(error) {
+                    console.log("Trình duyệt chặn hoặc chưa sẵn sàng file âm thanh.", error);
                 });
             } catch(e) {
                 console.log("Lỗi hệ thống âm thanh: ", e);
@@ -383,7 +381,7 @@
             document.getElementById(`lesson-${lessonNum}`).classList.add('active');
             event.target.classList.add('active');
             
-            // Dừng âm thanh
+            // Dừng âm thanh bài đọc
             document.querySelectorAll('audio').forEach(aud => { aud.pause(); aud.currentTime = 0; });
             document.querySelectorAll('.audio-btn').forEach(btn => { btn.innerHTML = '<i class="fa-solid fa-circle-play"></i> BẤM ĐỂ NGHE BÀI ĐỌC'; });
             
@@ -423,12 +421,12 @@
             
             fb.style.display = "block";
             if(finalScore === 10) {
-                playSound('correct.mp3');
+                playSystemSound(soundCorrect);
                 document.getElementById('progress-text').innerText = "Đã hoàn thành Xuất Sắc! 🎉";
                 fb.style.backgroundColor = "#D4EDDA"; fb.style.color = "#155724";
                 fb.innerHTML = `🎉 Tuyệt vời! Con đã trả lời đúng hết bài tập chính thức và đạt ${finalScore}/10 điểm.`;
             } else {
-                playSound('incorrect.mp3');
+                playSystemSound(soundIncorrect);
                 document.getElementById('progress-text').innerText = "Đang làm bài";
                 fb.style.backgroundColor = "#FFF3CD"; fb.style.color = "#856404";
                 fb.innerHTML = `✍️ Con đạt được ${finalScore}/10 điểm bài học chính thức. Hãy soát lại các câu chưa chính xác nhé!`;
@@ -469,11 +467,11 @@
 
             fbBonus.style.display = "block";
             if(flowerCount === totalFlowers) {
-                playSound('bravo.mp3'); // Tiếng vỗ tay khen thưởng bài làm thêm
+                playSystemSound(soundBravo); 
                 fbBonus.style.backgroundColor = "#E8F8F5"; fbBonus.style.color = "#117864";
                 fbBonus.innerHTML = `👏 Thật đáng khen! Con đã xuất sắc hoàn thành tất cả bài tập làm thêm và nhận trọn vẹn 2 bông hoa đỏ!`;
             } else {
-                playSound('incorrect.mp3');
+                playSystemSound(soundIncorrect);
                 fbBonus.style.backgroundColor = "#FADBD8"; fbBonus.style.color = "#78281F";
                 fbBonus.innerHTML = `⚠️ Con nhận được ${flowerCount}/${totalFlowers} bông hoa. Có câu làm thêm chưa chính xác, con thử lại nhé!`;
             }
@@ -506,12 +504,12 @@
 
             fb.style.display = "block";
             if(finalScore === 10) {
-                playSound('correct.mp3');
+                playSystemSound(soundCorrect);
                 document.getElementById('progress-text').innerText = "Đã hoàn thành Xuất Sắc! 🎉";
                 fb.style.backgroundColor = "#D4EDDA"; fb.style.color = "#155724";
                 fb.innerHTML = `🎉 Hoan hô! Con đã hoàn thành xuất sắc các bài tập chính thức! Điểm số tuyệt đối: ${finalScore}/10 điểm.`;
             } else {
-                playSound('incorrect.mp3');
+                playSystemSound(soundIncorrect);
                 document.getElementById('progress-text').innerText = "Đang làm bài";
                 fb.style.backgroundColor = "#FFF3CD"; fb.style.color = "#856404";
                 fb.innerHTML = `✍️ Con đạt được ${finalScore}/10 điểm bài học chính thức. Hãy thử đọc lại câu chuyện để sửa lại đáp án đúng nhé!`;
@@ -540,11 +538,11 @@
 
             fbBonus.style.display = "block";
             if(flowerCount === totalFlowers) {
-                playSound('bravo.mp3'); // Tiếng vỗ tay khen thưởng
+                playSystemSound(soundBravo); 
                 fbBonus.style.backgroundColor = "#E8F8F5"; fbBonus.style.color = "#117864";
                 fbBonus.innerHTML = `👏 Câu chuyện việc tốt của con rất đáng khen! Tặng con 1 bông hoa đỏ lấp lánh nhé!`;
             } else {
-                playSound('incorrect.mp3');
+                playSystemSound(soundIncorrect);
                 fbBonus.style.backgroundColor = "#FADBD8"; fbBonus.style.color = "#78281F";
                 fbBonus.innerHTML = `⚠️ Con cần viết câu dài và rõ ràng hơn một chút (từ 5 chữ trở lên) để nhận hoa thưởng từ bài tập này nhé!`;
             }
