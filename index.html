@@ -46,7 +46,7 @@
 
         .decor-icon { position: absolute; font-size: 24px; opacity: 0.7; animation: float 4s ease-in-out infinite; }
         @keyframes float {
-            0 { transform: translateY(0px) rotate(0deg); }
+            0% { transform: translateY(0px) rotate(0deg); }
             50% { transform: translateY(-10px) rotate(15deg); }
             100% { transform: translateY(0px) rotate(0deg); }
         }
@@ -88,4 +88,95 @@
         .img-container img { width: 100%; height: auto; display: block; }
         .text-content { font-size: 19px; line-height: 1.8; white-space: pre-line; text-align: left; padding: 15px; background: white; border-radius: 15px; }
         .author-text { text-align: right; font-style: italic; color: #7f8c8d; margin-top: 10px; font-size: 16px; }
-        .note-text { background: #E8F8F5; padding: 10px; border-radius: 10px; font-size: 15px; margin-top:
+        .note-text { background: #E8F8F5; padding: 10px; border-radius: 10px; font-size: 15px; margin-top: 15px; text-align: left; border-left: 4px solid var(--accent-color); }
+
+        .exercise-panel { background: #FDFEFE; padding: 25px; border-radius: 20px; border: 3px solid #D5F5E3; }
+        .exercise-title { font-size: 18px; color: #2C3E50; margin-bottom: 15px; padding-bottom: 5px; border-bottom: 2px dashed #ABEBC6; font-weight: bold; color: #27ae60; }
+        
+        .quiz-box { margin-bottom: 25px; background: #fff; padding: 15px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.03); }
+        .quiz-question { font-weight: bold; font-size: 16px; margin-bottom: 10px; color: #2c3e50; }
+        .option-group { display: flex; flex-direction: column; gap: 10px; margin-top: 8px; }
+        .option-label { display: flex; align-items: flex-start; gap: 10px; font-size: 16px; cursor: pointer; padding: 6px; border-radius: 6px; }
+        .option-label:hover { background: #f9f9f9; }
+        .option-label input { margin-top: 4px; transform: scale(1.2); }
+
+        .quiz-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        .quiz-table th, .quiz-table td { border: 1px solid #bdc3c7; padding: 10px; text-align: left; }
+        .quiz-table th { background-color: #f2f2f2; }
+        .quiz-table td:last-child { text-align: center; }
+        .quiz-table input[type="checkbox"] { transform: scale(1.3); cursor: pointer; }
+
+        .bonus-section { margin-top: 30px; padding: 20px; background: #F0F3F4; border-radius: 15px; border: 2px dashed #BDC3C7; }
+        .bonus-title { font-size: 16px; color: #7F8C8D; margin-bottom: 15px; font-weight: bold; text-transform: uppercase; display: flex; align-items: center; gap: 8px; }
+        
+        .drag-zone { display: flex; gap: 10px; margin-bottom: 15px; flex-wrap: wrap; }
+        .drag-item { background: #D6EAF8; border: 2px dashed #3498DB; padding: 8px 18px; border-radius: 15px; cursor: move; font-weight: bold; color: #2980B9; user-select: none; }
+        .drop-target { background: #EAEDED; border: 2px solid #BDC3C7; min-width: 130px; min-height: 42px; display: inline-flex; align-items: center; justify-content: center; border-radius: 10px; padding: 5px; vertical-align: middle; margin: 0 5px; }
+
+        input[type="text"] { padding: 8px 12px; font-size: 16px; border: 2px solid #BDC3C7; border-radius: 10px; outline: none; }
+        .input-error { border-color: #FF4757 !important; background-color: #FFD2D2; }
+        .input-success { border-color: #2ED573 !important; background-color: #D4EDDA; }
+
+        .btn-check { background: linear-gradient(to right, #2ED573, #1ABC9C); color: white; border: none; padding: 15px; font-size: 18px; font-weight: bold; border-radius: 15px; cursor: pointer; width: 100%; margin-top: 10px; box-shadow: 0 4px 10px rgba(46, 213, 115, 0.2); }
+        .ai-feedback { margin-top: 15px; padding: 15px; border-radius: 12px; display: none; font-weight: bold; font-size: 16px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <span class="decor-icon" style="top: 10px; left: 5%;">🌸</span>
+        <span class="decor-icon" style="bottom: 15px; left: 12%;">🍃</span>
+        <span class="decor-icon" style="top: 20px; right: 8%;">☀️</span>
+        <span class="decor-icon" style="bottom: 10px; right: 4%;">🎈</span>
+        <h1>BÀI ĐỌC MỞ RỘNG</h1>
+        <div class="sub-title">LỚP 2</div>
+    </header>
+
+    <div class="dashboard">
+        <div class="score-box"><i class="fa-solid fa-star"></i> Điểm bài học: <span id="total-score">0</span> / 10 điểm</div>
+        <div class="progress-box"><i class="fa-solid fa-flag"></i> Trạng thái: <span id="progress-text">Chưa hoàn thành</span></div>
+    </div>
+
+    <div class="tabs">
+        <button class="tab-btn active" onclick="switchLesson(1)">Bài 1: Em lớn lên rồi</button>
+        <button class="tab-btn" onclick="switchLesson(2)">Bài 2: Việc tốt</button>
+    </div>
+
+    <div id="lesson-1" class="lesson-container active">
+        <div class="reading-panel">
+            <audio id="audio-file-1" src="audio_bai1.mp3"></audio>
+            <button class="audio-btn" onclick="playRealAudio(1)"><i class="fa-solid fa-circle-play"></i> BẤM ĐỂ NGHE BÀI ĐỌC</button>
+            <div class="img-container"><img src="minhhoa_bai1.png" alt="Hình minh họa bài 1"></div>
+            <div class="text-content">
+                <b>Bài đọc 1: Em lớn lên rồi</b>
+                Năm nay em lớn lên rồi,
+                Không còn nhỏ xíu như hồi lên năm.
+                Nhìn trời, trời bớt xa xăm,
+                Nhìn sao, sao cách ngang tầm cánh tay.
+
+                Núi xa lúp xúp chân mây,
+                Bờ sông khép lại, hàng cây thấp dần.
+                Nơi xa bỗng hóa nên gần,
+                Quanh em bè bạn, quây quần bốn phương.
+                <div class="author-text">Tác giả: Trần Đăng Khoa</div>
+                <div class="note-text"><b>Chú thích:</b> <i>Lúp xúp</i> có nghĩa là nhiều vật liền nhau, thấp như nhau.</div>
+            </div>
+        </div>
+
+        <div class="exercise-panel">
+            <div class="exercise-title"><i class="fa-solid fa-book-open"></i> BÀI TẬP CHÍNH THỨC (Thang điểm 10)</div>
+            
+            <div class="quiz-box">
+                <div class="quiz-question">1. Đánh dấu ✕ vào ô trống trước ý đúng:</div>
+                <div class="quiz-question" style="color:#e67e22; font-size:15px;">a) Bạn nhỏ trong bài thơ thấy hình dáng của mình năm nay có gì khác trước?</div>
+                <div class="option-group">
+                    <label class="option-label"><input type="radio" name="q1a" value="1"> Núi xa lúp xúp chân mây.</label>
+                    <label class="option-label"><input type="radio" name="q1a" value="2"> Nơi xa bỗng hóa nên gần.</label>
+                    <label class="option-label"><input type="radio" name="q1a" value="3"> Đã lớn lên so với hồi lên năm.</label>
+                </div>
+            </div>
+
+            <div class="quiz-box">
+                <div class="quiz-question" style="color:#e67e22; font-size:15px;">b) Khi lớn lên, bạn nhỏ thấy các vật xung quanh thế nào?</div>
+                <div class="option-group">
+                    <label class="option-label"><input type="radio" name="q1b" value="1">
