@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bài Đọc Mở Rộng Lớp 2</title>
-    <!-- Tự nhúng biểu tượng emoji làm favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌸</text></svg>">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -18,13 +16,7 @@
             --card-bg: #FFFFFF;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Cookery, Comic Sans MS, sans-serif;
-        }
-
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Comic Sans MS, sans-serif; }
         body {
             background-color: var(--bg-color);
             background-image: radial-gradient(#FFF 20%, transparent 20%), radial-gradient(#FFF 20%, transparent 20%);
@@ -34,12 +26,11 @@
             padding: 20px;
         }
 
-        /* Giao diện Header mới sinh động cho học sinh lớp 2 */
         header {
             text-align: center;
             margin-bottom: 30px;
             background: linear-gradient(135deg, #FF6B81, #FFA502, #7BED9F);
-            padding: 40px 20px;
+            padding: 30px 20px;
             border-radius: 30px;
             color: white;
             position: relative;
@@ -47,508 +38,54 @@
             box-shadow: 0 8px 20px rgba(255, 107, 129, 0.2);
         }
 
-        header h1 {
-            font-size: 32px;
-            letter-spacing: 2px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-            margin-bottom: 10px;
-        }
-
+        header h1 { font-size: 30px; letter-spacing: 2px; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); margin-bottom: 10px; }
         header .sub-title {
-            font-size: 24px;
-            font-weight: bold;
-            background: rgba(255,255,255,0.2);
-            display: inline-block;
-            padding: 5px 25px;
-            border-radius: 20px;
-            box-shadow: inset 0 0 10px rgba(255,255,255,0.3);
+            font-size: 22px; font-weight: bold; background: rgba(255,255,255,0.2);
+            display: inline-block; padding: 5px 25px; border-radius: 20px;
         }
 
-        /* Họa tiết trang trí dễ thương */
-        .decor-icon {
-            position: absolute;
-            font-size: 24px;
-            opacity: 0.7;
-            animation: float 4s ease-in-out infinite;
-        }
+        .decor-icon { position: absolute; font-size: 24px; opacity: 0.7; animation: float 4s ease-in-out infinite; }
         @keyframes float {
-            0% { transform: translateY(0px) rotate(0deg); }
+            0 { transform: translateY(0px) rotate(0deg); }
             50% { transform: translateY(-10px) rotate(15deg); }
             100% { transform: translateY(0px) rotate(0deg); }
         }
 
         .dashboard {
-            display: flex;
-            justify-content: space-around;
-            background: white;
-            padding: 15px;
-            border-radius: 20px;
-            margin-bottom: 25px;
-            font-weight: bold;
-            font-size: 18px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            border: 3px dashed #FFD2 channels;
-            border-color: var(--secondary-color);
+            display: flex; justify-content: space-around; background: white; padding: 15px;
+            border-radius: 20px; margin-bottom: 25px; font-weight: bold; font-size: 18px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05); border: 3px dashed var(--secondary-color);
         }
-
         .score-box { color: #FF4757; }
         .progress-box { color: var(--accent-color); }
 
-        .tabs {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 25px;
-        }
-
+        .tabs { display: flex; justify-content: center; gap: 15px; margin-bottom: 25px; }
         .tab-btn {
-            padding: 15px 30px;
-            font-size: 18px;
-            font-weight: bold;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            background-color: #FFEAA7;
-            color: #d35400;
-            box-shadow: 0 4px 0 #ECCC68;
-            transition: all 0.2s;
+            padding: 12px 25px; font-size: 16px; font-weight: bold; border: none;
+            border-radius: 50px; cursor: pointer; background-color: #FFEAA7; color: #d35400;
+            box-shadow: 0 4px 0 #ECCC68; transition: all 0.2s;
         }
-
         .tab-btn.active {
-            background-color: #FF6B81;
-            color: white;
-            box-shadow: 0 4px 0 #FF4757;
-            transform: translateY(-2px);
+            background-color: #FF6B81; color: white; box-shadow: 0 4px 0 #FF4757; transform: translateY(-2px);
         }
 
         .lesson-container {
-            display: none;
-            grid-template-columns: 1fr 1fr;
-            gap: 25px;
-            background: var(--card-bg);
-            padding: 30px;
-            border-radius: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            border: 1px solid #FFE4E6;
+            display: none; grid-template-columns: 1fr 1fr; gap: 25px;
+            background: var(--card-bg); padding: 30px; border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid #FFE4E6;
         }
-
         .lesson-container.active { display: grid; }
+        @media (max-width: 900px) { .lesson-container { grid-template-columns: 1fr; } }
 
-        @media (max-width: 900px) {
-            .lesson-container { grid-template-columns: 1fr; }
-        }
-
-        .reading-panel {
-            background: #FFFDF0;
-            padding: 25px;
-            border-radius: 20px;
-            border: 3px solid #FFEAA7;
-            text-align: center;
-        }
-
-        /* Sửa nút nghe âm thanh sinh động và gọi chuẩn hàm phát file */
+        .reading-panel { background: #FFFDF0; padding: 25px; border-radius: 20px; border: 3px solid #FFEAA7; text-align: center; }
         .audio-btn {
-            background: linear-gradient(to right, #FF1E56, #FFAC41);
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 25px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 15px rgba(255, 30, 86, 0.3);
-            transition: transform 0.2s;
-        }
-        .audio-btn:hover { transform: scale(1.05); }
-
-        /* Khung hiển thị hình ảnh minh họa */
-        .img-container {
-            width: 100%;
-            max-width: 320px;
-            margin: 0 auto 20px auto;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            border: 4px solid white;
-        }
-        .img-container img {
-            width: 100%;
-            height: auto;
-            display: block;
+            background: linear-gradient(to right, #FF1E56, #FFAC41); color: white; border: none;
+            padding: 12px 25px; border-radius: 25px; font-size: 16px; font-weight: bold;
+            cursor: pointer; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(255, 30, 86, 0.3);
         }
 
-        .text-content {
-            font-size: 19px;
-            line-height: 1.8;
-            white-space: pre-line;
-            text-align: left;
-            padding: 10px;
-            background: white;
-            border-radius: 15px;
-            box-shadow: inset 0 0 8px rgba(0,0,0,0.02);
-        }
-
-        .author-text {
-            text-align: right;
-            font-style: italic;
-            color: #7f8c8d;
-            margin-top: 10px;
-            font-size: 16px;
-        }
-
-        .note-text {
-            background: #E8F8F5;
-            padding: 10px;
-            border-radius: 10px;
-            font-size: 15px;
-            margin-top: 15px;
-            text-align: left;
-            border-left: 4px solid var(--accent-color);
-        }
-
-        .exercise-panel {
-            background: #FDFEFE;
-            padding: 25px;
-            border-radius: 20px;
-            border: 3px solid #D5F5E3;
-        }
-
-        .exercise-title {
-            font-size: 18px;
-            color: #2C3E50;
-            margin-bottom: 15px;
-            padding-bottom: 5px;
-            border-bottom: 2px dashed #ABEBC6;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .quiz-box { margin-bottom: 25px; }
-
-        .drag-zone {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 15px;
-            flex-wrap: wrap;
-        }
-
-        .drag-item {
-            background: #D6EAF8;
-            border: 2px dashed #3498DB;
-            padding: 8px 18px;
-            border-radius: 15px;
-            cursor: move;
-            font-weight: bold;
-            color: #2980B9;
-        }
-
-        .drop-target {
-            background: #EAEDED;
-            border: 2px solid #BDC3C7;
-            min-width: 120px;
-            min-height: 40px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 10px;
-            padding: 5px;
-            vertical-align: middle;
-        }
-
-        input[type="text"], select {
-            padding: 8px 12px;
-            font-size: 16px;
-            border: 2px solid #BDC3C7;
-            border-radius: 10px;
-            margin: 0 5px;
-            outline: none;
-        }
-
-        .input-error { border-color: #FF4757 !important; background-color: #FFD2D2; }
-        .input-success { border-color: #2ED573 !important; background-color: #D4EDDA; }
-
-        .btn-check {
-            background: linear-gradient(to right, #2ED573, #1ABC9C);
-            color: white;
-            border: none;
-            padding: 15px;
-            font-size: 18px;
-            font-weight: bold;
-            border-radius: 15px;
-            cursor: pointer;
-            width: 100%;
-            margin-top: 10px;
-            box-shadow: 0 4px 10px rgba(46, 213, 115, 0.2);
-        }
-
-        .ai-feedback {
-            margin-top: 15px;
-            padding: 15px;
-            border-radius: 12px;
-            display: none;
-            font-weight: bold;
-            font-size: 16px;
-        }
-    </style>
-</head>
-<body>
-
-    <!-- Giao diện tiêu đề cải tiến mới cho Lớp 2 -->
-    <header>
-        <span class="decor-icon" style="top: 10px; left: 5%;">🌸</span>
-        <span class="decor-icon" style="bottom: 15px; left: 12%;">🍃</span>
-        <span class="decor-icon" style="top: 20px; right: 8%;">☀️</span>
-        <span class="decor-icon" style="bottom: 10px; right: 4%;">🎈</span>
-        
-        <h1>BÀI ĐỌC MỞ RỘNG</h1>
-        <div class="sub-title">LỚP 2</div>
-    </header>
-
-    <div class="dashboard">
-        <div class="score-box"><i class="fa-solid fa-star"></i> Điểm của con: <span id="total-score">0</span> xu</div>
-        <div class="progress-box"><i class="fa-solid fa-flag"></i> Đã hoàn thành: <span id="progress-text">0/2</span> bài</div>
-    </div>
-
-    <div class="tabs">
-        <button class="tab-btn active" onclick="switchLesson(1)">Bài 1: Em lớn lên rồi</button>
-        <button class="tab-btn" onclick="switchLesson(2)">Bài 2: Việc tốt</button>
-    </div>
-
-    <!-- Bài 1 -->
-    <div id="lesson-1" class="lesson-container active">
-        <div class="reading-panel">
-            <!-- Thẻ phát âm thanh thực tế từ file của bạn -->
-            <audio id="audio-file-1" src="audio_bai1.mp3"></audio>
-            <button class="audio-btn" onclick="playRealAudio(1)"><i class="fa-solid fa-circle-play"></i> BẤM ĐỂ NGHE BÀI ĐỌC</button>
-            
-            <!-- Sửa đường dẫn hình ảnh hiển thị tại gốc -->
-            <div class="img-container">
-                <img src="minhhoa_bai1.png" alt="Hình minh họa bài 1">
-            </div>
-
-            <div class="text-content">
-                <b>Bài đọc 1: Em lớn lên rồi</b>
-
-                Năm nay em lớn lên rồi,
-                Không còn nhỏ xíu như hồi lên năm.
-                Nhìn trời, trời bớt xa xăm,
-                Nhìn sao, sao cách ngang tầm cánh tay.
-
-                Núi xa lúp xúp chân mây,
-                Bờ sông khép lại, hàng cây thấp dần.
-                Nơi xa bỗng hóa nên gần,
-                Quanh em bè bạn, quây quần bốn phương.
-                <div class="author-text">Tác giả: Trần Đăng Khoa</div>
-                
-                <div class="note-text"><b>Chú thích:</b> <i>Lúp xúp</i> có nghĩa là nhiều vật liền nhau, thấp như nhau.</div>
-            </div>
-        </div>
-
-        <div class="exercise-panel">
-            <div class="quiz-box">
-                <div class="exercise-title"><i class="fa-solid fa-cloud-sun-rain"></i> Thử thách 1: Kéo từ đúng vào ô giải nghĩa</div>
-                <div class="drag-zone">
-                    <div class="drag-item" draggable="true" ondragstart="drag(event)" id="drag1">lúp xúp</div>
-                </div>
-                <p>Nhiều vật liền nhau, thấp đều nhau gọi là: <div class="drop-target" ondrop="drop(event)" ondragover="allowDrop(event)" data-answer="drag1"></div></p>
-            </div>
-
-            <div class="quiz-box">
-                <div class="exercise-title"><i class="fa-solid fa-pencil"></i> Thử thách 2: Điền từ còn thiếu vào chỗ trống</div>
-                <p>Năm nay con thấy mình lớn lên vì không còn <input type="text" id="blank1" placeholder="...?" style="width: 100px;"> như hồi lên năm nữa.</p>
-            </div>
-
-            <button class="btn-check" onclick="checkLesson1()">Nộp bài chấm điểm</button>
-            <div id="feedback-1" class="ai-feedback"></div>
-        </div>
-    </div>
-
-    <!-- Bài 2 -->
-    <div id="lesson-2" class="lesson-container">
-        <div class="reading-panel">
-            <!-- Thẻ phát âm thanh thực tế từ file của bạn -->
-            <audio id="audio-file-2" src="audio_bai2.mp3"></audio>
-            <button class="audio-btn" onclick="playRealAudio(2)"><i class="fa-solid fa-circle-play"></i> BẤM ĐỂ NGHE BÀI ĐỌC</button>
-            
-            <!-- Sửa đường dẫn hình ảnh hiển thị tại gốc -->
-            <div class="img-container">
-                <img src="minhhoa_bai2.png" alt="Hình minh họa bài 2">
-            </div>
-
-            <div class="text-content">
-                <b>Bài đọc 2: Việc tốt</b>
-
-                1. Chủ nhật, nhớ lời cô dặn về nhà cần làm việc tốt, Hùng định quét nhà. Nhưng chị Hà quét trước mất rồi. Hùng đang không biết làm gì thì bác Cảnh sang nhờ trông giúp em bé. Hùng trông em, chỉ mong bé khóc để dỗ, nhưng bé cứ cười toe toét. Lúc từ nhà bác Cảnh về, thấy một bà cụ đang tìm số nhà, Hùng ân cần chỉ giúp. Bà cứ khen Hùng mãi. Về nhà, Hùng lấy nước uống rồi rửa ấm chén.
-
-                2. Sáng thứ hai, các bạn báo cáo cô giáo những việc tốt đã làm. Hùng cũng kể việc mình đã làm. Kể xong, em nói: "Em xin lỗi cô, em chưa làm được việc tốt nào ạ!"
-
-                3. Cô giáo cười: "Em đã làm được ba việc tốt rồi! Em rất đáng khen!"
-                <div class="author-text">Theo tác giả: Phong Thu</div>
-            </div>
-        </div>
-
-        <div class="exercise-panel">
-            <div class="quiz-box">
-                <div class="exercise-title"><i class="fa-solid fa-star-and-crecent"></i> Thử thách 1: Chọn từ đúng</div>
-                <p>
-                    Bạn Hùng đã giúp đỡ ai tìm số nhà? 
-                    <select id="select1">
-                        <option value="">--Chọn--</option>
-                        <option value="bac">Bác Cảnh</option>
-                        <option value="cu">Một bà cụ</option>
-                    </select>
-                </p>
-            </div>
-
-            <div class="quiz-box">
-                <div class="exercise-title"><i class="fa-solid fa-feather"></i> Thử thách 2: Tập viết câu tự do</div>
-                <label style="display:block; margin-bottom:8px; font-weight:bold;">Hãy viết lại 1 việc tốt con đã làm ở nhà để kể cho cô giáo nghe:</label>
-                <input type="text" id="ai-input" placeholder="Ví dụ: Con đã giúp mẹ cho mèo ăn." style="width: 100%; padding: 10px;">
-            </div>
-
-            <button class="btn-check" onclick="checkLesson2()">Nộp bài chấm điểm</button>
-            <div id="feedback-2" class="ai-feedback"></div>
-        </div>
-    </div>
-
-    <script>
-        let currentScore = 0;
-        let completedLessons = new Set();
-        let audioCtx = null;
-
-        // Hàm gọi âm thanh thực tế từ file .mp3 bạn tải lên
-        function playRealAudio(lessonNum) {
-            // Tắt âm thanh bài khác nếu đang phát
-            document.querySelectorAll('audio').forEach(aud => {
-                if(aud.id !== `audio-file-${lessonNum}`) {
-                    aud.pause();
-                    aud.currentTime = 0;
-                }
-            });
-            
-            const audio = document.getElementById(`audio-file-${lessonNum}`);
-            if (audio.paused) {
-                audio.play();
-                event.target.innerHTML = '<i class="fa-solid fa-circle-pause"></i> ĐANG PHÁT (BẤM ĐỂ DỪNG)';
-            } else {
-                audio.pause();
-                event.target.innerHTML = '<i class="fa-solid fa-circle-play"></i> BẤM ĐỂ NGHE BÀI ĐỌC';
-            }
-            
-            // Trả lại trạng thái nút khi phát xong file
-            audio.onended = function() {
-                event.target.innerHTML = '<i class="fa-solid fa-circle-play"></i> BẤM ĐỂ NGHE BÀI ĐỌC';
-            };
-        }
-
-        // Tạo tiếng Ting ting kỹ thuật số khi làm đúng
-        function playBeep(type) {
-            try {
-                if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                let osc = audioCtx.createOscillator();
-                let gain = audioCtx.createGain();
-                osc.connect(gain); gain.connect(audioCtx.destination);
-                if (type === 'success') {
-                    osc.frequency.setValueAtTime(523.25, audioCtx.currentTime);
-                    osc.frequency.setValueAtTime(659.25, audioCtx.currentTime + 0.1);
-                    gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
-                    osc.start(); osc.stop(audioCtx.currentTime + 0.25);
-                } else {
-                    osc.frequency.setValueAtTime(220, audioCtx.currentTime);
-                    gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
-                    osc.start(); osc.stop(audioCtx.currentTime + 0.2);
-                }
-            } catch(e) {}
-        }
-
-        function switchLesson(lessonNum) {
-            document.querySelectorAll('.lesson-container').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
-            document.getElementById(`lesson-${lessonNum}`).classList.add('active');
-            event.target.classList.add('active');
-            // Tắt hết âm thanh khi chuyển bài
-            document.querySelectorAll('audio').forEach(aud => { aud.pause(); aud.currentTime = 0; });
-            document.querySelectorAll('.audio-btn').forEach(btn => { btn.innerHTML = '<i class="fa-solid fa-circle-play"></i> BẤM ĐỂ NGHE BÀI ĐỌC'; });
-        }
-
-        function allowDrop(ev) { ev.preventDefault(); }
-        function drag(ev) { ev.dataTransfer.setData("text", ev.target.id); }
-        function drop(ev) {
-            ev.preventDefault();
-            var data = ev.dataTransfer.setData("text");
-            if (ev.target.innerHTML === "") {
-                ev.target.appendChild(document.getElementById(data));
-            }
-        }
-
-        function checkLesson1() {
-            let scoreEarned = 0; let isCorrect = true;
-            const fb = document.getElementById('feedback-1');
-            const target = document.querySelector('#lesson-1 .drop-target');
-            const child = target.firstElementChild;
-            
-            if(child && child.id === target.getAttribute('data-answer')) {
-                target.style.borderColor = "#2ED573"; scoreEarned += 20;
-            } else { target.style.borderColor = "#FF4757"; isCorrect = false; }
-
-            const b1 = document.getElementById('blank1');
-            if(b1.value.trim() === "nhỏ xíu") { b1.className = "input-success"; scoreEarned += 20; } 
-            else { b1.className = "input-error"; isCorrect = false; }
-
-            fb.style.display = "block";
-            if(isCorrect) {
-                playBeep('success');
-                fb.style.backgroundColor = "#D4EDDA"; fb.style.color = "#155724";
-                fb.innerHTML = "🎉 Tuyệt vời! Con đã vượt qua toàn bộ thử thách Bài 1 rồi!";
-                if(!completedLessons.has(1)) { currentScore += scoreEarned; completedLessons.add(1); }
-            } else {
-                playBeep('fail');
-                fb.style.backgroundColor = "#F8D7DA"; fb.style.color = "#721C24";
-                fb.innerHTML = "✍️ Có chỗ chưa chính xác kìa, con kiểm tra kỹ lại nhé!";
-            }
-            updateDashboard();
-        }
-
-        function checkLesson2() {
-            let scoreEarned = 0; let isCorrect = true;
-            const fb = document.getElementById('feedback-2');
-            const s1 = document.getElementById('select1');
-
-            if(s1.value === "cu") { s1.className = "input-success"; scoreEarned += 20; } 
-            else { s1.className = "input-error"; isCorrect = false; }
-
-            const aiInput = document.getElementById('ai-input').value.trim();
-            let aiMsg = "";
-
-            if(aiInput === "") {
-                isCorrect = false;
-                aiMsg = "<br>⚠️ Con chưa điền câu kể việc tốt của mình kìa!";
-            } else {
-                scoreEarned += 30;
-                aiMsg = "<br>🤖 <b>AI nhận xét:</b> Câu văn rất ngoan và hay! Thầy cô khen ngợi con nhé! ⭐";
-                document.getElementById('ai-input').className = "input-success";
-            }
-
-            fb.style.display = "block";
-            if(isCorrect) {
-                playBeep('success');
-                fb.style.backgroundColor = "#D4EDDA"; fb.style.color = "#155724";
-                fb.innerHTML = "🎉 Hoan hô! Con đã hoàn thành Bài 2 xuất sắc!" + aiMsg;
-                if(!completedLessons.has(2)) { currentScore += scoreEarned; completedLessons.add(2); }
-            } else {
-                playBeep('fail');
-                fb.style.backgroundColor = "#F8D7DA"; fb.style.color = "#721C24";
-                fb.innerHTML = "✍️ Hãy thử làm lại một chút con nhé!" + aiMsg;
-            }
-            updateDashboard();
-        }
-
-        function updateDashboard() {
-            document.getElementById('total-score').innerText = currentScore;
-            document.getElementById('progress-text').innerText = `${completedLessons.size}/2`;
-        }
-    </script>
-</body>
-</html>
+        .img-container { width: 100%; max-width: 320px; margin: 0 auto 20px auto; border-radius: 15px; overflow: hidden; border: 4px solid white; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .img-container img { width: 100%; height: auto; display: block; }
+        .text-content { font-size: 19px; line-height: 1.8; white-space: pre-line; text-align: left; padding: 15px; background: white; border-radius: 15px; }
+        .author-text { text-align: right; font-style: italic; color: #7f8c8d; margin-top: 10px; font-size: 16px; }
+        .note-text { background: #E8F8F5; padding: 10px; border-radius: 10px; font-size: 15px; margin-top:
