@@ -3,50 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Học Tiếng Việt Tương Tác</title>
-    <!-- Tự tạo favicon bằng biểu tượng emoji cuốn sách mà không cần file favicon.ico bên ngoài -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
+    <title>Bài Đọc Mở Rộng Lớp 2</title>
+    <!-- Tự nhúng biểu tượng emoji làm favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌸</text></svg>">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #4CAF50;
-            --secondary-color: #FF9800;
-            --bg-color: #f4f9f4;
-            --text-color: #333;
-            --card-bg: #ffffff;
+            --primary-color: #FF6B81;
+            --secondary-color: #FFA502;
+            --accent-color: #2ED573;
+            --bg-color: #FFF9E6;
+            --text-color: #4A4A4A;
+            --card-bg: #FFFFFF;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Cookery, Comic Sans MS, sans-serif;
         }
 
         body {
             background-color: var(--bg-color);
+            background-image: radial-gradient(#FFF 20%, transparent 20%), radial-gradient(#FFF 20%, transparent 20%);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
             color: var(--text-color);
             padding: 20px;
         }
 
-        /* Tự biến đổi màu sắc sinh động bằng code thay cho file hình nền bg_header.jpg */
+        /* Giao diện Header mới sinh động cho học sinh lớp 2 */
         header {
             text-align: center;
             margin-bottom: 30px;
-            background: linear-gradient(135deg, #4CAF50, #8BC34A, #FF9800);
-            background-size: 200% 200%;
-            animation: gradientBg 10s ease infinite;
-            padding: 30px 20px;
-            border-radius: 15px;
+            background: linear-gradient(135deg, #FF6B81, #FFA502, #7BED9F);
+            padding: 40px 20px;
+            border-radius: 30px;
             color: white;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(255, 107, 129, 0.2);
         }
 
-        @keyframes gradientBg {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        header h1 {
+            font-size: 32px;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            margin-bottom: 10px;
+        }
+
+        header .sub-title {
+            font-size: 24px;
+            font-weight: bold;
+            background: rgba(255,255,255,0.2);
+            display: inline-block;
+            padding: 5px 25px;
+            border-radius: 20px;
+            box-shadow: inset 0 0 10px rgba(255,255,255,0.3);
+        }
+
+        /* Họa tiết trang trí dễ thương */
+        .decor-icon {
+            position: absolute;
+            font-size: 24px;
+            opacity: 0.7;
+            animation: float 4s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(15deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
         }
 
         .dashboard {
@@ -54,14 +82,17 @@
             justify-content: space-around;
             background: white;
             padding: 15px;
-            border-radius: 10px;
+            border-radius: 20px;
             margin-bottom: 25px;
             font-weight: bold;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            font-size: 18px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            border: 3px dashed #FFD2 channels;
+            border-color: var(--secondary-color);
         }
 
-        .score-box { color: var(--secondary-color); }
-        .progress-box { color: var(--primary-color); }
+        .score-box { color: #FF4757; }
+        .progress-box { color: var(--accent-color); }
 
         .tabs {
             display: flex;
@@ -71,20 +102,23 @@
         }
 
         .tab-btn {
-            padding: 12px 25px;
-            font-size: 16px;
+            padding: 15px 30px;
+            font-size: 18px;
             font-weight: bold;
             border: none;
-            border-radius: 25px;
+            border-radius: 50px;
             cursor: pointer;
-            background-color: #ddd;
-            transition: all 0.3s;
+            background-color: #FFEAA7;
+            color: #d35400;
+            box-shadow: 0 4px 0 #ECCC68;
+            transition: all 0.2s;
         }
 
         .tab-btn.active {
-            background-color: var(--primary-color);
+            background-color: #FF6B81;
             color: white;
-            transform: scale(1.05);
+            box-shadow: 0 4px 0 #FF4757;
+            transform: translateY(-2px);
         }
 
         .lesson-container {
@@ -92,71 +126,106 @@
             grid-template-columns: 1fr 1fr;
             gap: 25px;
             background: var(--card-bg);
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border: 1px solid #FFE4E6;
         }
 
-        .lesson-container.active {
-            display: grid;
-        }
+        .lesson-container.active { display: grid; }
 
         @media (max-width: 900px) {
             .lesson-container { grid-template-columns: 1fr; }
         }
 
         .reading-panel {
-            background: #fffef2;
-            padding: 20px;
-            border-radius: 10px;
-            border-left: 5px solid var(--secondary-color);
+            background: #FFFDF0;
+            padding: 25px;
+            border-radius: 20px;
+            border: 3px solid #FFEAA7;
+            text-align: center;
         }
 
+        /* Sửa nút nghe âm thanh sinh động và gọi chuẩn hàm phát file */
         .audio-btn {
-            background-color: var(--secondary-color);
+            background: linear-gradient(to right, #FF1E56, #FFAC41);
             color: white;
             border: none;
-            padding: 8px 15px;
-            border-radius: 20px;
-            cursor: pointer;
-            margin-bottom: 15px;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 16px;
             font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(255, 30, 86, 0.3);
+            transition: transform 0.2s;
         }
+        .audio-btn:hover { transform: scale(1.05); }
 
-        .audio-btn:hover { opacity: 0.9; }
+        /* Khung hiển thị hình ảnh minh họa */
+        .img-container {
+            width: 100%;
+            max-width: 320px;
+            margin: 0 auto 20px auto;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border: 4px solid white;
+        }
+        .img-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
 
         .text-content {
-            font-size: 18px;
+            font-size: 19px;
             line-height: 1.8;
             white-space: pre-line;
+            text-align: left;
+            padding: 10px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: inset 0 0 8px rgba(0,0,0,0.02);
         }
 
-        .highlight {
-            background-color: #fff3cd;
-            transition: background-color 0.3s;
+        .author-text {
+            text-align: right;
+            font-style: italic;
+            color: #7f8c8d;
+            margin-top: 10px;
+            font-size: 16px;
+        }
+
+        .note-text {
+            background: #E8F8F5;
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 15px;
+            margin-top: 15px;
+            text-align: left;
+            border-left: 4px solid var(--accent-color);
         }
 
         .exercise-panel {
-            background: #f9f9f9;
-            padding: 20px;
-            border-radius: 10px;
-            border: 1px solid #e0e0e0;
+            background: #FDFEFE;
+            padding: 25px;
+            border-radius: 20px;
+            border: 3px solid #D5F5E3;
         }
 
         .exercise-title {
             font-size: 18px;
-            color: #2c3e50;
+            color: #2C3E50;
             margin-bottom: 15px;
             padding-bottom: 5px;
-            border-bottom: 2px solid #ddd;
+            border-bottom: 2px dashed #ABEBC6;
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
-        .quiz-box {
-            margin-bottom: 25px;
-        }
+        .quiz-box { margin-bottom: 25px; }
 
         .drag-zone {
             display: flex;
@@ -166,116 +235,132 @@
         }
 
         .drag-item {
-            background: #e3f2fd;
-            border: 2px dashed #2196f3;
-            padding: 8px 15px;
-            border-radius: 5px;
+            background: #D6EAF8;
+            border: 2px dashed #3498DB;
+            padding: 8px 18px;
+            border-radius: 15px;
             cursor: move;
             font-weight: bold;
+            color: #2980B9;
         }
 
         .drop-target {
-            background: #eee;
-            border: 2px solid #ccc;
+            background: #EAEDED;
+            border: 2px solid #BDC3C7;
             min-width: 120px;
             min-height: 40px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            border-radius: 5px;
+            border-radius: 10px;
             padding: 5px;
             vertical-align: middle;
         }
 
         input[type="text"], select {
-            padding: 6px 12px;
+            padding: 8px 12px;
             font-size: 16px;
-            border: 2px solid #ccc;
-            border-radius: 5px;
+            border: 2px solid #BDC3C7;
+            border-radius: 10px;
             margin: 0 5px;
             outline: none;
         }
 
-        input[type="text"]:focus, select:focus {
-            border-color: var(--primary-color);
-        }
-
-        .input-error { border-color: #f44336 !important; background-color: #ffebee; }
-        .input-success { border-color: #4CAF50 !important; background-color: #e8f5e9; }
+        .input-error { border-color: #FF4757 !important; background-color: #FFD2D2; }
+        .input-success { border-color: #2ED573 !important; background-color: #D4EDDA; }
 
         .btn-check {
-            background-color: var(--primary-color);
+            background: linear-gradient(to right, #2ED573, #1ABC9C);
             color: white;
             border: none;
-            padding: 10px 20px;
-            font-size: 16px;
+            padding: 15px;
+            font-size: 18px;
             font-weight: bold;
-            border-radius: 5px;
+            border-radius: 15px;
             cursor: pointer;
             width: 100%;
             margin-top: 10px;
+            box-shadow: 0 4px 10px rgba(46, 213, 115, 0.2);
         }
 
         .ai-feedback {
-            margin-top: 10px;
-            padding: 10px;
-            border-radius: 5px;
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 12px;
             display: none;
-            font-weight: 500;
+            font-weight: bold;
+            font-size: 16px;
         }
     </style>
 </head>
 <body>
 
+    <!-- Giao diện tiêu đề cải tiến mới cho Lớp 2 -->
     <header>
-        <h1><i class="fa-solid fa-book-open-reader"></i> HỆ THỐNG LUYỆN VIẾT TIẾNG VIỆT TƯƠNG TÁC</h1>
-        <p>Ứng dụng học tập thông minh phong cách Movers</p>
+        <span class="decor-icon" style="top: 10px; left: 5%;">🌸</span>
+        <span class="decor-icon" style="bottom: 15px; left: 12%;">🍃</span>
+        <span class="decor-icon" style="top: 20px; right: 8%;">☀️</span>
+        <span class="decor-icon" style="bottom: 10px; right: 4%;">🎈</span>
+        
+        <h1>BÀI ĐỌC MỞ RỘNG</h1>
+        <div class="sub-title">LỚP 2</div>
     </header>
 
     <div class="dashboard">
-        <div class="score-box"><i class="fa-solid fa-star"></i> Điểm số: <span id="total-score">0</span> xu</div>
-        <div class="progress-box"><i class="fa-solid fa-trophy"></i> Tiến độ: <span id="progress-text">0/2</span> bài</div>
+        <div class="score-box"><i class="fa-solid fa-star"></i> Điểm của con: <span id="total-score">0</span> xu</div>
+        <div class="progress-box"><i class="fa-solid fa-flag"></i> Đã hoàn thành: <span id="progress-text">0/2</span> bài</div>
     </div>
 
     <div class="tabs">
-        <button class="tab-btn active" onclick="switchLesson(1)">Bài 1: Em lớn lên từng ngày</button>
-        <button class="tab-btn" onclick="switchLesson(2)">Bài 2: Đi học vui sao</button>
+        <button class="tab-btn active" onclick="switchLesson(1)">Bài 1: Em lớn lên rồi</button>
+        <button class="tab-btn" onclick="switchLesson(2)">Bài 2: Việc tốt</button>
     </div>
 
     <!-- Bài 1 -->
     <div id="lesson-1" class="lesson-container active">
         <div class="reading-panel">
-            <button class="audio-btn" onclick="playMockAudio('text-b1')"><i class="fa-solid fa-volume-high"></i> Nghe giọng đọc bài thơ</button>
-            <div id="text-b1" class="text-content">
-                Mỗi năm một lớp học
-                Em lớn thêm từng ngày
-                Tự thắt dây giày nhỏ
-                Tự đeo ba lô này.
+            <!-- Thẻ phát âm thanh thực tế từ file của bạn -->
+            <audio id="audio-file-1" src="audio_bai1.mp3"></audio>
+            <button class="audio-btn" onclick="playRealAudio(1)"><i class="fa-solid fa-circle-play"></i> BẤM ĐỂ NGHE BÀI ĐỌC</button>
+            
+            <!-- Sửa đường dẫn hình ảnh hiển thị tại gốc -->
+            <div class="img-container">
+                <img src="minhhoa_bai1.png" alt="Hình minh họa bài 1">
+            </div>
 
-                Trang sách thơm tươm tất
-                Chữ viết đều thẳng ngay
-                Chào lớp hai thân mến
-                Em tự lập từ đây!
+            <div class="text-content">
+                <b>Bài đọc 1: Em lớn lên rồi</b>
+
+                Năm nay em lớn lên rồi,
+                Không còn nhỏ xíu như hồi lên năm.
+                Nhìn trời, trời bớt xa xăm,
+                Nhìn sao, sao cách ngang tầm cánh tay.
+
+                Núi xa lúp xúp chân mây,
+                Bờ sông khép lại, hàng cây thấp dần.
+                Nơi xa bỗng hóa nên gần,
+                Quanh em bè bạn, quây quần bốn phương.
+                <div class="author-text">Tác giả: Trần Đăng Khoa</div>
+                
+                <div class="note-text"><b>Chú thích:</b> <i>Lúp xúp</i> có nghĩa là nhiều vật liền nhau, thấp như nhau.</div>
             </div>
         </div>
 
         <div class="exercise-panel">
             <div class="quiz-box">
-                <div class="exercise-title"><i class="fa-solid fa-puzzle-piece"></i> Thử thách 1: Kéo thả từ đúng vào ô nghĩa</div>
+                <div class="exercise-title"><i class="fa-solid fa-cloud-sun-rain"></i> Thử thách 1: Kéo từ đúng vào ô giải nghĩa</div>
                 <div class="drag-zone">
-                    <div class="drag-item" draggable="true" ondragstart="drag(event)" id="drag1">tươm tất</div>
-                    <div class="drag-item" draggable="true" ondragstart="drag(event)" id="drag2">tự lập</div>
+                    <div class="drag-item" draggable="true" ondragstart="drag(event)" id="drag1">lúp xúp</div>
                 </div>
-                <p style="margin-bottom: 10px;">1. Tự mình làm công việc, không dựa dẫm: <div class="drop-target" ondrop="drop(event)" ondragover="allowDrop(event)" data-answer="drag2"></div></p>
-                <p>2. Gọn gàng, sạch đẹp và ngay ngắn: <div class="drop-target" ondrop="drop(event)" ondragover="allowDrop(event)" data-answer="drag1"></div></p>
+                <p>Nhiều vật liền nhau, thấp đều nhau gọi là: <div class="drop-target" ondrop="drop(event)" ondragover="allowDrop(event)" data-answer="drag1"></div></p>
             </div>
 
             <div class="quiz-box">
-                <div class="exercise-title"><i class="fa-solid fa-pen-to-square"></i> Thử thách 2: Điền một từ chính xác vào chỗ trống</div>
-                <p>Năm nay em bước vào học lớp <input type="text" id="blank1" placeholder="...?" style="width: 80px;">. Buổi sáng đi học, em luôn sửa sang quần áo cho thật gọn gàng, <input type="text" id="blank2" placeholder="...?" style="width: 100px;">.</p>
+                <div class="exercise-title"><i class="fa-solid fa-pencil"></i> Thử thách 2: Điền từ còn thiếu vào chỗ trống</div>
+                <p>Năm nay con thấy mình lớn lên vì không còn <input type="text" id="blank1" placeholder="...?" style="width: 100px;"> như hồi lên năm nữa.</p>
             </div>
 
-            <button class="btn-check" onclick="checkLesson1()">Kiểm tra kết quả Bài 1</button>
+            <button class="btn-check" onclick="checkLesson1()">Nộp bài chấm điểm</button>
             <div id="feedback-1" class="ai-feedback"></div>
         </div>
     </div>
@@ -283,40 +368,47 @@
     <!-- Bài 2 -->
     <div id="lesson-2" class="lesson-container">
         <div class="reading-panel">
-            <button class="audio-btn" onclick="playMockAudio('text-b2')"><i class="fa-solid fa-volume-high"></i> Nghe giọng đọc câu chuyện</button>
-            <div id="text-b2" class="text-content">
-                Hôm nay là tiết học vẽ của lớp hai. Thầy giáo hướng dẫn cả lớp vẽ một bức tranh về cảnh bình minh trên quê hương. 
+            <!-- Thẻ phát âm thanh thực tế từ file của bạn -->
+            <audio id="audio-file-2" src="audio_bai2.mp3"></audio>
+            <button class="audio-btn" onclick="playRealAudio(2)"><i class="fa-solid fa-circle-play"></i> BẤM ĐỂ NGHE BÀI ĐỌC</button>
+            
+            <!-- Sửa đường dẫn hình ảnh hiển thị tại gốc -->
+            <div class="img-container">
+                <img src="minhhoa_bai2.png" alt="Hình minh họa bài 2">
+            </div>
 
-                Bạn Nam hào hứng cầm bút màu đỏ tô điểm cho ông mặt trời rực rỡ. Bạn Hoa vẽ thêm những chú chim nhỏ đang bay lượn quanh mái trường. Tiết học trôi qua thật vui vẻ và tràn ngập tiếng cười.
+            <div class="text-content">
+                <b>Bài đọc 2: Việc tốt</b>
+
+                1. Chủ nhật, nhớ lời cô dặn về nhà cần làm việc tốt, Hùng định quét nhà. Nhưng chị Hà quét trước mất rồi. Hùng đang không biết làm gì thì bác Cảnh sang nhờ trông giúp em bé. Hùng trông em, chỉ mong bé khóc để dỗ, nhưng bé cứ cười toe toét. Lúc từ nhà bác Cảnh về, thấy một bà cụ đang tìm số nhà, Hùng ân cần chỉ giúp. Bà cứ khen Hùng mãi. Về nhà, Hùng lấy nước uống rồi rửa ấm chén.
+
+                2. Sáng thứ hai, các bạn báo cáo cô giáo những việc tốt đã làm. Hùng cũng kể việc mình đã làm. Kể xong, em nói: "Em xin lỗi cô, em chưa làm được việc tốt nào ạ!"
+
+                3. Cô giáo cười: "Em đã làm được ba việc tốt rồi! Em rất đáng khen!"
+                <div class="author-text">Theo tác giả: Phong Thu</div>
             </div>
         </div>
 
         <div class="exercise-panel">
             <div class="quiz-box">
-                <div class="exercise-title"><i class="fa-solid fa-list-check"></i> Thử thách 1: Chọn từ thích hợp để hoàn thành đoạn văn</div>
+                <div class="exercise-title"><i class="fa-solid fa-star-and-crecent"></i> Thử thách 1: Chọn từ đúng</div>
                 <p>
-                    Tiết học vẽ hôm nay vô cùng 
+                    Bạn Hùng đã giúp đỡ ai tìm số nhà? 
                     <select id="select1">
                         <option value="">--Chọn--</option>
-                        <option value="vui">vui vẻ</option>
-                        <option value="buon">buồn bã</option>
-                    </select>. 
-                    Các bạn hào hứng dùng 
-                    <select id="select2">
-                        <option value="">--Chọn--</option>
-                        <option value="sach">quyển sách</option>
-                        <option value="but">bút màu</option>
-                    </select> để vẽ tranh.
+                        <option value="bac">Bác Cảnh</option>
+                        <option value="cu">Một bà cụ</option>
+                    </select>
                 </p>
             </div>
 
             <div class="quiz-box">
-                <div class="exercise-title"><i class="fa-solid fa-robot"></i> Thử thách 2: Trí tuệ nhân tạo (AI) chấm câu tự do</div>
-                <label style="display:block; margin-bottom:8px; font-weight:bold;">Hãy viết 1 câu mô tả cảm xúc của các bạn nhỏ trong tiết học vẽ:</label>
-                <input type="text" id="ai-input" placeholder="Ví dụ: Các bạn nhỏ học vẽ rất vui vẻ." style="width: 100%; padding: 10px;">
+                <div class="exercise-title"><i class="fa-solid fa-feather"></i> Thử thách 2: Tập viết câu tự do</div>
+                <label style="display:block; margin-bottom:8px; font-weight:bold;">Hãy viết lại 1 việc tốt con đã làm ở nhà để kể cho cô giáo nghe:</label>
+                <input type="text" id="ai-input" placeholder="Ví dụ: Con đã giúp mẹ cho mèo ăn." style="width: 100%; padding: 10px;">
             </div>
 
-            <button class="btn-check" onclick="checkLesson2()">Kiểm tra kết quả Bài 2</button>
+            <button class="btn-check" onclick="checkLesson2()">Nộp bài chấm điểm</button>
             <div id="feedback-2" class="ai-feedback"></div>
         </div>
     </div>
@@ -326,28 +418,49 @@
         let completedLessons = new Set();
         let audioCtx = null;
 
-        // Hàm tự động phát âm thanh điện tử kỹ thuật số bằng thuật toán (Không cần file mp3 bên ngoài)
+        // Hàm gọi âm thanh thực tế từ file .mp3 bạn tải lên
+        function playRealAudio(lessonNum) {
+            // Tắt âm thanh bài khác nếu đang phát
+            document.querySelectorAll('audio').forEach(aud => {
+                if(aud.id !== `audio-file-${lessonNum}`) {
+                    aud.pause();
+                    aud.currentTime = 0;
+                }
+            });
+            
+            const audio = document.getElementById(`audio-file-${lessonNum}`);
+            if (audio.paused) {
+                audio.play();
+                event.target.innerHTML = '<i class="fa-solid fa-circle-pause"></i> ĐANG PHÁT (BẤM ĐỂ DỪNG)';
+            } else {
+                audio.pause();
+                event.target.innerHTML = '<i class="fa-solid fa-circle-play"></i> BẤM ĐỂ NGHE BÀI ĐỌC';
+            }
+            
+            // Trả lại trạng thái nút khi phát xong file
+            audio.onended = function() {
+                event.target.innerHTML = '<i class="fa-solid fa-circle-play"></i> BẤM ĐỂ NGHE BÀI ĐỌC';
+            };
+        }
+
+        // Tạo tiếng Ting ting kỹ thuật số khi làm đúng
         function playBeep(type) {
             try {
                 if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
                 let osc = audioCtx.createOscillator();
                 let gain = audioCtx.createGain();
-                osc.connect(gain);
-                gain.connect(audioCtx.destination);
-
+                osc.connect(gain); gain.connect(audioCtx.destination);
                 if (type === 'success') {
-                    osc.frequency.setValueAtTime(523.25, audioCtx.currentTime); // Nốt Đô
-                    osc.frequency.setValueAtTime(659.25, audioCtx.currentTime + 0.1); // Nốt Mi
-                    gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
-                    osc.start();
-                    osc.stop(audioCtx.currentTime + 0.25);
-                } else if (type === 'fail') {
-                    osc.frequency.setValueAtTime(220, audioCtx.currentTime); // Âm trầm báo sai
-                    gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
-                    osc.start();
-                    osc.stop(audioCtx.currentTime + 0.2);
+                    osc.frequency.setValueAtTime(523.25, audioCtx.currentTime);
+                    osc.frequency.setValueAtTime(659.25, audioCtx.currentTime + 0.1);
+                    gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+                    osc.start(); osc.stop(audioCtx.currentTime + 0.25);
+                } else {
+                    osc.frequency.setValueAtTime(220, audioCtx.currentTime);
+                    gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+                    osc.start(); osc.stop(audioCtx.currentTime + 0.2);
                 }
-            } catch(e) { console.log("Trình duyệt chặn phát âm thanh tự động"); }
+            } catch(e) {}
         }
 
         function switchLesson(lessonNum) {
@@ -355,125 +468,79 @@
             document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
             document.getElementById(`lesson-${lessonNum}`).classList.add('active');
             event.target.classList.add('active');
-        }
-
-        function playMockAudio(elementId) {
-            const panel = document.getElementById(elementId);
-            const originalText = panel.innerText;
-            const words = originalText.split(/(\s+)/);
-            panel.innerHTML = '';
-            words.forEach(word => {
-                if(word.trim() === "") {
-                    panel.appendChild(document.createTextNode(word));
-                } else {
-                    let span = document.createElement('span');
-                    span.innerText = word;
-                    panel.appendChild(span);
-                }
-            });
-            let spans = panel.querySelectorAll('span');
-            let index = 0;
-            let interval = setInterval(() => {
-                if(index > 0) spans[index-1].classList.remove('highlight');
-                if(index < spans.length) {
-                    spans[index].classList.add('highlight');
-                    index++;
-                } else {
-                    clearInterval(interval);
-                    panel.innerText = originalText;
-                }
-            }, 250);
+            // Tắt hết âm thanh khi chuyển bài
+            document.querySelectorAll('audio').forEach(aud => { aud.pause(); aud.currentTime = 0; });
+            document.querySelectorAll('.audio-btn').forEach(btn => { btn.innerHTML = '<i class="fa-solid fa-circle-play"></i> BẤM ĐỂ NGHE BÀI ĐỌC'; });
         }
 
         function allowDrop(ev) { ev.preventDefault(); }
         function drag(ev) { ev.dataTransfer.setData("text", ev.target.id); }
         function drop(ev) {
             ev.preventDefault();
-            var data = ev.dataTransfer.getData("text");
+            var data = ev.dataTransfer.setData("text");
             if (ev.target.innerHTML === "") {
                 ev.target.appendChild(document.getElementById(data));
             }
         }
 
         function checkLesson1() {
-            let scoreEarned = 0;
-            let isCorrect = true;
+            let scoreEarned = 0; let isCorrect = true;
             const fb = document.getElementById('feedback-1');
-            const targets = document.querySelectorAll('#lesson-1 .drop-target');
+            const target = document.querySelector('#lesson-1 .drop-target');
+            const child = target.firstElementChild;
             
-            targets.forEach(target => {
-                const child = target.firstElementChild;
-                if(child && child.id === target.getAttribute('data-answer')) {
-                    target.style.borderColor = "#4CAF50";
-                    scoreEarned += 10;
-                } else {
-                    target.style.borderColor = "#f44336";
-                    isCorrect = false;
-                }
-            });
+            if(child && child.id === target.getAttribute('data-answer')) {
+                target.style.borderColor = "#2ED573"; scoreEarned += 20;
+            } else { target.style.borderColor = "#FF4757"; isCorrect = false; }
 
             const b1 = document.getElementById('blank1');
-            const b2 = document.getElementById('blank2');
-
-            if(b1.value.trim() === "hai") { b1.className = "input-success"; scoreEarned += 10; } 
+            if(b1.value.trim() === "nhỏ xíu") { b1.className = "input-success"; scoreEarned += 20; } 
             else { b1.className = "input-error"; isCorrect = false; }
-
-            if(b2.value.trim().toLowerCase() === "tươm tất") { b2.className = "input-success"; scoreEarned += 10; } 
-            else { b2.className = "input-error"; isCorrect = false; }
 
             fb.style.display = "block";
             if(isCorrect) {
                 playBeep('success');
-                fb.style.backgroundColor = "#e8f5e9"; fb.style.color = "#2e7d32";
-                fb.innerHTML = "🎉 Tuyệt vời! Bạn đã làm đúng hết các thử thách bài 1.";
+                fb.style.backgroundColor = "#D4EDDA"; fb.style.color = "#155724";
+                fb.innerHTML = "🎉 Tuyệt vời! Con đã vượt qua toàn bộ thử thách Bài 1 rồi!";
                 if(!completedLessons.has(1)) { currentScore += scoreEarned; completedLessons.add(1); }
             } else {
                 playBeep('fail');
-                fb.style.backgroundColor = "#ffebee"; fb.style.color = "#c62828";
-                fb.innerHTML = "✍️ Có một vài chỗ chưa chính xác. Hãy kiểm tra lại nhé!";
+                fb.style.backgroundColor = "#F8D7DA"; fb.style.color = "#721C24";
+                fb.innerHTML = "✍️ Có chỗ chưa chính xác kìa, con kiểm tra kỹ lại nhé!";
             }
             updateDashboard();
         }
 
         function checkLesson2() {
-            let scoreEarned = 0;
-            let isCorrect = true;
+            let scoreEarned = 0; let isCorrect = true;
             const fb = document.getElementById('feedback-2');
             const s1 = document.getElementById('select1');
-            const s2 = document.getElementById('select2');
 
-            if(s1.value === "vui") { s1.className = "input-success"; scoreEarned += 10; } 
+            if(s1.value === "cu") { s1.className = "input-success"; scoreEarned += 20; } 
             else { s1.className = "input-error"; isCorrect = false; }
-
-            if(s2.value === "but") { s2.className = "input-success"; scoreEarned += 10; } 
-            else { s2.className = "input-error"; isCorrect = false; }
 
             const aiInput = document.getElementById('ai-input').value.trim();
             let aiMsg = "";
 
             if(aiInput === "") {
                 isCorrect = false;
-                aiMsg = "<br>⚠️ Bạn chưa điền câu trả lời cho AI chấm.";
-            } else if (aiInput.includes("vui vẽ")) {
-                isCorrect = false;
-                aiMsg = "<br>🤖 <b>AI nhắc nhở:</b> Con chú ý viết đúng chính tả từ <b>'vui vẻ'</b> (dấu hỏi) nhé!";
-                document.getElementById('ai-input').className = "input-error";
+                aiMsg = "<br>⚠️ Con chưa điền câu kể việc tốt của mình kìa!";
             } else {
-                scoreEarned += 20;
-                aiMsg = "<br>🤖 <b>AI khen ngợi:</b> Câu văn rất chuẩn và hay! ⭐⭐⭐";
+                scoreEarned += 30;
+                aiMsg = "<br>🤖 <b>AI nhận xét:</b> Câu văn rất ngoan và hay! Thầy cô khen ngợi con nhé! ⭐";
                 document.getElementById('ai-input').className = "input-success";
             }
 
             fb.style.display = "block";
             if(isCorrect) {
                 playBeep('success');
-                fb.style.backgroundColor = "#e8f5e9"; fb.style.color = "#2e7d32";
-                fb.innerHTML = "🎉 Chúc mừng bạn đã hoàn thành Bài 2!" + aiMsg;
+                fb.style.backgroundColor = "#D4EDDA"; fb.style.color = "#155724";
+                fb.innerHTML = "🎉 Hoan hô! Con đã hoàn thành Bài 2 xuất sắc!" + aiMsg;
                 if(!completedLessons.has(2)) { currentScore += scoreEarned; completedLessons.add(2); }
             } else {
                 playBeep('fail');
-                fb.style.backgroundColor = "#ffebee"; fb.style.color = "#c62828";
-                fb.innerHTML = "✍️ Thử lại một chút bạn nhé!" + aiMsg;
+                fb.style.backgroundColor = "#F8D7DA"; fb.style.color = "#721C24";
+                fb.innerHTML = "✍️ Hãy thử làm lại một chút con nhé!" + aiMsg;
             }
             updateDashboard();
         }
